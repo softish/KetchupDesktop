@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ public class KetchupDesktopView extends BorderPane {
 
     private Button resetButton;
     private Button changeStateButton;
+    private Label timerLabel;
 
     public KetchupDesktopView() {
         initView();
@@ -20,8 +22,8 @@ public class KetchupDesktopView extends BorderPane {
         resetButton = new Button("Reset");
         changeStateButton = new Button("Start");
 
-        Label label = new Label("00:00:00");
-        label.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+        timerLabel = new Label("00:00:00");
+        timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
         FlowPane buttonsPane = new FlowPane();
         buttonsPane.getChildren().add(resetButton);
@@ -29,7 +31,25 @@ public class KetchupDesktopView extends BorderPane {
         buttonsPane.setHgap(10);
         buttonsPane.setAlignment(Pos.CENTER);
 
-        this.setCenter(label);
+        this.setCenter(timerLabel);
         this.setBottom(buttonsPane);
+    }
+
+    public void setTimeLabel(String text) {
+        timerLabel.setText(text);
+    }
+
+    public void addEventHandlers(Controller controller) {
+        EventHandler changeTimerStateHandler = (EventHandler<ActionEvent>) event -> {
+            controller.changeTimerState();
+        };
+
+        changeStateButton.setOnAction(changeTimerStateHandler);
+
+        EventHandler resetHandler = (EventHandler<ActionEvent>) event -> {
+            controller.resetTimer();
+        };
+
+        resetButton.setOnAction(resetHandler);
     }
 }
