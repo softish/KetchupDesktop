@@ -27,7 +27,7 @@ public class KetchupDesktopView extends BorderPane implements Observer {
         changeStateButton = new Button("Start");
 
         timerLabel = new Label("00:00:00");
-        timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
+        timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-fill: #DCDCDC");
 
         FlowPane buttonsPane = new FlowPane();
         buttonsPane.getChildren().add(resetButton);
@@ -37,6 +37,7 @@ public class KetchupDesktopView extends BorderPane implements Observer {
 
         this.setCenter(timerLabel);
         this.setBottom(buttonsPane);
+        this.setStyle("-fx-background: #1E1E1E;");
     }
 
     public void setTimeLabel(String text) {
