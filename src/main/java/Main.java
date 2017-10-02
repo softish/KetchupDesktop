@@ -2,6 +2,7 @@ import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.TimerModel;
 import view.KetchupDesktopView;
 
 import javax.naming.ldap.Control;
@@ -24,7 +25,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
         Scene scene = new Scene(ketchupDesktopView, 480, 640);
-        Controller controller = new Controller(ketchupDesktopView);
+        TimerModel timerModel = new TimerModel(20);
+        Controller controller = new Controller(ketchupDesktopView, timerModel);
         ketchupDesktopView.addEventHandlers(controller);
 
         primaryStage.setTitle("KetchupDesktop");
