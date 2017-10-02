@@ -2,8 +2,6 @@ package view;
 
 import controller.Controller;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,26 +40,12 @@ public class KetchupDesktopView extends BorderPane implements Observer {
     }
 
     public void addEventHandlers(Controller controller) {
-        EventHandler changeTimerStateHandler = (EventHandler<ActionEvent>) event -> {
-            controller.changeTimerState();
-        };
-
-        changeStateButton.setOnAction(changeTimerStateHandler);
-
-        EventHandler resetHandler = (EventHandler<ActionEvent>) event -> {
-            controller.resetTimer();
-        };
-
-        resetButton.setOnAction(resetHandler);
+        changeStateButton.setOnAction(event -> controller.changeTimerState());
+        resetButton.setOnAction(event -> controller.resetTimer());
     }
 
     @Override
     public void update(String timeLeft) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                setTimeLabel(timeLeft);
-            }
-        });
+        Platform.runLater(() -> setTimeLabel(timeLeft));
     }
 }
