@@ -13,10 +13,10 @@ public class Controller {
         this.ketchupDesktopView = ketchupDesktopView;
         this.timerModel = timerModel;
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
+        timerModel.subscribe(ketchupDesktopView);
     }
 
     public void changeTimerState() {
-        ketchupDesktopView.setTimeLabel("timer was started");
         timerModel.startTimer();
     }
 

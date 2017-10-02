@@ -19,7 +19,6 @@ public class TimerModelTask extends Thread {
             try {
                 timeTarget -= 1000;
                 timerModel.setTimeLeft(timeTarget);
-                System.out.println(timeTarget);
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

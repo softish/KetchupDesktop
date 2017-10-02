@@ -1,14 +1,16 @@
 package view;
 
 import controller.Controller;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import model.Observer;
 
-public class KetchupDesktopView extends BorderPane {
+public class KetchupDesktopView extends BorderPane implements Observer {
 
     private Button resetButton;
     private Button changeStateButton;
@@ -51,5 +53,15 @@ public class KetchupDesktopView extends BorderPane {
         };
 
         resetButton.setOnAction(resetHandler);
+    }
+
+    @Override
+    public void update(String timeLeft) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                setTimeLabel(timeLeft);
+            }
+        });
     }
 }
