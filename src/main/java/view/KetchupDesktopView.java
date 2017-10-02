@@ -5,6 +5,10 @@ import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import model.Observer;
 
@@ -42,6 +46,13 @@ public class KetchupDesktopView extends BorderPane implements Observer {
     public void addEventHandlers(Controller controller) {
         changeStateButton.setOnAction(event -> controller.changeTimerState());
         resetButton.setOnAction(event -> controller.resetTimer());
+
+        KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+        this.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (keyCodeCombination.match(event)) {
+                controller.changeTimerState();
+            }
+        });
     }
 
     @Override

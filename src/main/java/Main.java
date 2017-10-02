@@ -5,8 +5,6 @@ import javafx.stage.Stage;
 import model.TimerModel;
 import view.KetchupDesktopView;
 
-import javax.naming.ldap.Control;
-
 /**
  * Bootstraps the application.
  */
