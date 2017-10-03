@@ -7,6 +7,7 @@ public class TimerModelTask extends Thread {
 
     private long timeTarget;
     private TimerModel timerModel;
+    private boolean end;
 
     public TimerModelTask(long timeTarget, TimerModel timerModel) {
         this.timeTarget = timeTarget;
@@ -17,6 +18,10 @@ public class TimerModelTask extends Thread {
     public void run() {
         while (timeTarget > 0) {
             try {
+                if(end) {
+                    break;
+                }
+
                 timeTarget -= 1000;
                 timerModel.setTimeLeft(timeTarget);
                 Thread.sleep(1000);
@@ -24,5 +29,9 @@ public class TimerModelTask extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void end() {
+        end = true;
     }
 }

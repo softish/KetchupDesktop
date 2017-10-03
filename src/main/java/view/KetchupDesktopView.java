@@ -62,6 +62,10 @@ public class KetchupDesktopView extends BorderPane implements Observer {
         });
     }
 
+    public void setChangeStateButtonText(String text) {
+        changeStateButton.setText(text);
+    }
+
     @Override
     public void update(String timeLeft) {
         Platform.runLater(() -> setTimeLabel(timeLeft));

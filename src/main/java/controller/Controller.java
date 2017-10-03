@@ -17,7 +17,13 @@ public class Controller {
     }
 
     public void changeTimerState() {
-        timerModel.startTimer();
+        if(timerModel.isTimerActive()) {
+            timerModel.stopTimer();
+            ketchupDesktopView.setChangeStateButtonText("Start");
+        } else {
+            timerModel.startTimer();
+            ketchupDesktopView.setChangeStateButtonText("Stop");
+        }
     }
 
     public void resetTimer() {

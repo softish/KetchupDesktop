@@ -27,11 +27,18 @@ public class TimerModel implements Subject {
     }
 
     public void startTimer() {
-        timerModelTask.start();
+        if(!timerModelTask.isAlive()) {
+            timerModelTask = new TimerModelTask(timeLeft, this);
+            timerModelTask.start();
+        }
     }
 
     public void stopTimer() {
+        timerModelTask.end();
+    }
 
+    public boolean isTimerActive() {
+        return timerModelTask.isAlive();
     }
 
     public long getTimeLeft() {
