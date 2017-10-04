@@ -11,17 +11,14 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class KetchupDesktopView extends BorderPane {
 
     private Button resetButton;
     private Button changeStateButton;
     private Label timerLabel;
-    private Stage primaryStage;
 
-    public KetchupDesktopView(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public KetchupDesktopView() {
         initView();
     }
 
@@ -62,12 +59,6 @@ public class KetchupDesktopView extends BorderPane {
             if (keyCodeCombination.match(event)) {
                 controller.changeTimerState();
             }
-        });
-
-        primaryStage.setOnCloseRequest(event -> {
-            event.consume();
-            controller.exitApplication();
-            primaryStage.close();
         });
     }
 

@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.stage.Window;
 import model.Observer;
 import model.TimeFormatter;
 import model.TimerEvent;
