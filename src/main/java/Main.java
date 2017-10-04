@@ -21,7 +21,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
+        KetchupDesktopView ketchupDesktopView = new KetchupDesktopView(primaryStage);
         Scene scene = new Scene(ketchupDesktopView, 360, 640);
         TimerModel timerModel = new TimerModel(20);
         Controller controller = new Controller(ketchupDesktopView, timerModel);

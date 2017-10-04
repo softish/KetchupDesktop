@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.stage.Window;
 import model.Observer;
 import model.TimeFormatter;
 import model.TimerEvent;
@@ -30,6 +31,10 @@ public class Controller implements Observer {
 
     public void resetTimer() {
         ketchupDesktopView.setTimeLabel("timer was reset");
+    }
+
+    public void exitApplication() {
+        timerModel.stopTimer();
     }
 
     @Override
