@@ -47,7 +47,11 @@ public class TimerModel implements Subject {
 
     public void setTimeLeft(long timeLeft) {
         this.timeLeft = timeLeft;
-        notifyObservers();
+        notifyObservers(TimerEvent.TICK);
+    }
+
+    public void timeout() {
+        notifyObservers(TimerEvent.TIME_OUT);
     }
 
     @Override
@@ -65,9 +69,9 @@ public class TimerModel implements Subject {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(TimerEvent timerEvent) {
         for(Observer observer : observers) {
-            observer.update(TimeFormatter.getTimeLeftFormatted(this));
+            observer.update(timerEvent);
         }
     }
 }

@@ -3,6 +3,7 @@ package view;
 import controller.Controller;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -10,9 +11,8 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import model.Observer;
 
-public class KetchupDesktopView extends BorderPane implements Observer {
+public class KetchupDesktopView extends BorderPane {
 
     private Button resetButton;
     private Button changeStateButton;
@@ -66,8 +66,20 @@ public class KetchupDesktopView extends BorderPane implements Observer {
         changeStateButton.setText(text);
     }
 
-    @Override
-    public void update(String timeLeft) {
+    public void updateTimeLabel(String timeLeft) {
         Platform.runLater(() -> setTimeLabel(timeLeft));
+    }
+
+    public void displayTimeOut() {
+        Platform.runLater(() -> showTimeOutAlert());
+    }
+
+    private void showTimeOutAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Time out");
+        alert.setHeaderText(null);
+        alert.setContentText("Time out");
+
+        alert.showAndWait();
     }
 }

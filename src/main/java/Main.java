@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
-        Scene scene = new Scene(ketchupDesktopView, 480, 640);
+        Scene scene = new Scene(ketchupDesktopView, 360, 640);
         TimerModel timerModel = new TimerModel(20);
         Controller controller = new Controller(ketchupDesktopView, timerModel);
         ketchupDesktopView.addEventHandlers(controller);

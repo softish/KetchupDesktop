@@ -1,10 +1,12 @@
 package controller;
 
+import model.Observer;
 import model.TimeFormatter;
+import model.TimerEvent;
 import model.TimerModel;
 import view.KetchupDesktopView;
 
-public class Controller {
+public class Controller implements Observer {
 
     private KetchupDesktopView ketchupDesktopView;
     private TimerModel timerModel;
@@ -13,7 +15,7 @@ public class Controller {
         this.ketchupDesktopView = ketchupDesktopView;
         this.timerModel = timerModel;
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
-        timerModel.subscribe(ketchupDesktopView);
+        timerModel.subscribe(this);
     }
 
     public void changeTimerState() {
@@ -28,5 +30,15 @@ public class Controller {
 
     public void resetTimer() {
         ketchupDesktopView.setTimeLabel("timer was reset");
+    }
+
+    @Override
+    public void update(TimerEvent timerEvent) {
+        if(timerEvent.equals(TimerEvent.TICK)) {
+            ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
+        }
+        if(timerEvent.equals(TimerEvent.TIME_OUT)) {
+            ketchupDesktopView.displayTimeOut();
+        }
     }
 }

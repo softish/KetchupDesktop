@@ -29,6 +29,10 @@ public class TimerModelTask extends Thread {
                 e.printStackTrace();
             }
         }
+        
+        if(timeTarget == 0) {
+            timerModel.timeout();
+        }
     }
 
     public void end() {

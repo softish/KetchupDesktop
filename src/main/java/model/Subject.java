@@ -6,5 +6,5 @@ package model;
 public interface Subject {
     void subscribe(Observer observer);
     void unSubscribe(Observer observer);
-    void notifyObservers();
+    void notifyObservers(TimerEvent timerEvent);
 }
