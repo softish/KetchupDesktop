@@ -54,6 +54,11 @@ public class TimerModel implements Subject {
         notifyObservers(TimerEvent.TIME_OUT);
     }
 
+    public void resetTimer() {
+        timeLeft = timeTarget;
+        notifyObservers(TimerEvent.RESET);
+    }
+
     @Override
     public void subscribe(Observer observer) {
         if(!observers.contains(observer)) {

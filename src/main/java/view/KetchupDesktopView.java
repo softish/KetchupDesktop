@@ -82,4 +82,20 @@ public class KetchupDesktopView extends BorderPane {
 
         alert.showAndWait();
     }
+
+    public void enableChangeStateButton() {
+        changeStateButton.setDisable(false);
+    }
+
+    public void disableChangeStateButton() {
+        changeStateButton.setDisable(true);
+    }
+
+    public void enableResetButton() {
+        resetButton.setDisable(false);
+    }
+
+    public void disableResetButton() {
+        resetButton.setDisable(true);
+    }
 }

@@ -5,5 +5,6 @@ package model;
  */
 public enum TimerEvent {
     TICK,
-    TIME_OUT
+    TIME_OUT,
+    RESET
 }

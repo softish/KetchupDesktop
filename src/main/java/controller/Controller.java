@@ -22,14 +22,16 @@ public class Controller implements Observer {
         if(timerModel.isTimerActive()) {
             timerModel.stopTimer();
             ketchupDesktopView.setChangeStateButtonText("Start");
+            ketchupDesktopView.enableResetButton();
         } else {
             timerModel.startTimer();
             ketchupDesktopView.setChangeStateButtonText("Stop");
+            ketchupDesktopView.disableResetButton();
         }
     }
 
     public void resetTimer() {
-        ketchupDesktopView.setTimeLabel("timer was reset");
+        timerModel.resetTimer();
     }
 
     public void exitApplication() {
@@ -38,11 +40,20 @@ public class Controller implements Observer {
 
     @Override
     public void update(TimerEvent timerEvent) {
-        if(timerEvent.equals(TimerEvent.TICK)) {
+        if (timerEvent.equals(TimerEvent.TICK)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
         }
-        if(timerEvent.equals(TimerEvent.TIME_OUT)) {
+        if (timerEvent.equals(TimerEvent.TIME_OUT)) {
             ketchupDesktopView.displayTimeOut();
+            ketchupDesktopView.disableChangeStateButton();
+            ketchupDesktopView.enableResetButton();
+        }
+        if (timerEvent.equals(TimerEvent.RESET)) {
+            ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
+            ketchupDesktopView.enableChangeStateButton();
+            if(!timerModel.isTimerActive()) {
+                ketchupDesktopView.setChangeStateButtonText("Start");
+            }
         }
     }
 }
