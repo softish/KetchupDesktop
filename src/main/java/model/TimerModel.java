@@ -8,21 +8,21 @@ import java.util.List;
  */
 public class TimerModel implements Subject {
 
-    private long timeTarget;
+    private long timeTargetMillis;
     private long timeLeft;
     private TimerModelTask timerModelTask;
 
     private List<Observer> observers;
 
     /**
-     * Constructs a timer with time out at the provided timeTarget.
+     * Constructs a timer with time out at the provided timeTargetMillis.
      *
      * @param timeTarget when the time out should occur in minutes
      */
     public TimerModel(long timeTarget) {
-        this.timeTarget = timeTarget * 60 * 1000;
-        timerModelTask = new TimerModelTask(this.timeTarget, this);
-        timeLeft = this.timeTarget;
+        this.timeTargetMillis = timeTarget * 60 * 1000;
+        timerModelTask = new TimerModelTask(this.timeTargetMillis, this);
+        timeLeft = this.timeTargetMillis;
         observers = new ArrayList<>();
     }
 
@@ -55,8 +55,12 @@ public class TimerModel implements Subject {
     }
 
     public void resetTimer() {
-        timeLeft = timeTarget;
+        timeLeft = timeTargetMillis;
         notifyObservers(TimerEvent.RESET);
+    }
+
+    public int getSessionDurationMillis() {
+        return Math.toIntExact(timeTargetMillis - timeLeft / 60000);
     }
 
     @Override

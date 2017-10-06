@@ -1,5 +1,6 @@
 package model.api;
 
+import model.api.dtos.AuthenticatedUser;
 import model.api.dtos.TimedSession;
 import model.api.dtos.User;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,11 @@ public class APIDriver {
         restTemplate.postForObject(BASE_URL+"/session/save", request, TimedSession.class);
     }
 
+    public void saveSession(int duration) {
+        AuthenticatedUser user = authenticate("KetchupUser", "KetchupUser");
+        saveSession(user.getId(), duration);
+    }
+
     public void register(String username, String password) {
         User user = new User(username, password);
         RestTemplate restTemplate = new RestTemplate();
@@ -26,10 +32,10 @@ public class APIDriver {
         restTemplate.postForObject(BASE_URL+"/user/register", request, User.class);
     }
 
-    public User authenticate(String username, String password) {
+    public AuthenticatedUser authenticate(String username, String password) {
         User user = new User(username, password);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<User> request = new HttpEntity<>(user);
-        return restTemplate.postForObject(BASE_URL+"/user/authenticate", request, User.class);
+        return restTemplate.postForObject(BASE_URL+"/user/authenticate", request, AuthenticatedUser.class);
     }
 }

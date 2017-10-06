@@ -1,6 +1,7 @@
 package model;
 
 import model.api.APIDriver;
+import model.api.dtos.AuthenticatedUser;
 import model.api.dtos.User;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class APIDriverTest {
     @Test
     public void testAuthenticate() throws Exception {
         APIDriver apiDriver = new APIDriver();
-        User user = apiDriver.authenticate("testUser", "testPassword");
-        assertEquals(user.getUserId(), 1);
+        AuthenticatedUser user = apiDriver.authenticate("testUser", "testPassword");
+        assertEquals(user.getId(), 1);
     }
 }

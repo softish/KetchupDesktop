@@ -1,33 +1,23 @@
 package model.api.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by softish on 2017-10-05.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
-    private long userId;
+
     private String userName;
     private String password;
 
-    public User(String userName, String password) {
+    @JsonCreator
+    public User(@JsonProperty("userName") String userName,
+                @JsonProperty("password") String password) {
         this.userName = userName;
         this.password = password;
-    }
-
-    public User(long userId, String userName, String password) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public String getUserName() {

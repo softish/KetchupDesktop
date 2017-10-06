@@ -4,18 +4,21 @@ import model.Observer;
 import model.TimeFormatter;
 import model.TimerEvent;
 import model.TimerModel;
+import model.api.APIDriver;
 import view.KetchupDesktopView;
 
 public class Controller implements Observer {
 
     private KetchupDesktopView ketchupDesktopView;
     private TimerModel timerModel;
+    private APIDriver apiDriver;
 
     public Controller(KetchupDesktopView ketchupDesktopView, TimerModel timerModel) {
         this.ketchupDesktopView = ketchupDesktopView;
         this.timerModel = timerModel;
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
         timerModel.subscribe(this);
+        apiDriver = new APIDriver();
     }
 
     public void changeTimerState() {
@@ -47,6 +50,7 @@ public class Controller implements Observer {
             ketchupDesktopView.displayTimeOut();
             ketchupDesktopView.disableChangeStateButton();
             ketchupDesktopView.enableResetButton();
+            apiDriver.saveSession(timerModel.getSessionDurationMillis());
         }
         if (timerEvent.equals(TimerEvent.RESET)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
