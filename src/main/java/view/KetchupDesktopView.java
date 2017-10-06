@@ -33,6 +33,7 @@ public class KetchupDesktopView extends BorderPane {
         buttonsPane.getChildren().add(resetButton);
         buttonsPane.getChildren().add(changeStateButton);
         buttonsPane.setHgap(10);
+        buttonsPane.setStyle("-fx-padding: 25;");
         buttonsPane.setAlignment(Pos.CENTER);
 
         this.setCenter(timerLabel);
