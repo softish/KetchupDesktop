@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
  */
 public class APIDriver {
 
+    private User user;
+
     private static final String BASE_URL = "http://localhost:8080";
 
     public void saveSession(long userId, long sessionDuration) {
@@ -37,5 +39,13 @@ public class APIDriver {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<User> request = new HttpEntity<>(user);
         return restTemplate.postForObject(BASE_URL+"/user/authenticate", request, AuthenticatedUser.class);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

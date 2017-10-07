@@ -1,11 +1,15 @@
 package controller;
 
+import javafx.util.Pair;
 import model.Observer;
 import model.TimeFormatter;
 import model.TimerEvent;
 import model.TimerModel;
 import model.api.APIDriver;
+import model.api.dtos.User;
 import view.KetchupDesktopView;
+
+import java.util.Optional;
 
 public class Controller implements Observer {
 
@@ -39,6 +43,15 @@ public class Controller implements Observer {
 
     public void exitApplication() {
         timerModel.stopTimer();
+    }
+
+    public void loginHandler() {
+        Optional<Pair<String, String>> result = ketchupDesktopView.showLoginDialog();
+
+        result.ifPresent(usernamePassword -> {
+            User user = new User(usernamePassword.getKey(), usernamePassword.getValue());
+            apiDriver.setUser(user);
+        });
     }
 
     @Override
