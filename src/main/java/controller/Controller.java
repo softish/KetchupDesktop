@@ -1,5 +1,6 @@
 package controller;
 
+import exception.ServerUnreachableException;
 import javafx.util.Pair;
 import model.Observer;
 import model.TimeFormatter;
@@ -51,6 +52,12 @@ public class Controller implements Observer {
         result.ifPresent(usernamePassword -> {
             User user = new User(usernamePassword.getKey(), usernamePassword.getValue());
             apiDriver.setUser(user);
+
+            try {
+                apiDriver.authenticate(usernamePassword.getKey(), usernamePassword.getValue());
+            } catch (ServerUnreachableException e) {
+                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+            }
         });
     }
 

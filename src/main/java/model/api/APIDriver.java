@@ -1,10 +1,14 @@
 package model.api;
 
+import exception.ServerUnreachableException;
 import model.api.dtos.AuthenticatedUser;
 import model.api.dtos.TimedSession;
 import model.api.dtos.User;
 import org.springframework.http.HttpEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.ConnectException;
 
 /**
  * Created by softish on 2017-10-04.
@@ -38,7 +42,15 @@ public class APIDriver {
         User user = new User(username, password);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<User> request = new HttpEntity<>(user);
-        return restTemplate.postForObject(BASE_URL+"/user/authenticate", request, AuthenticatedUser.class);
+        AuthenticatedUser authenticatedUser;
+
+        try {
+            authenticatedUser = restTemplate.postForObject(BASE_URL+"/user/authenticate", request, AuthenticatedUser.class);
+        } catch (RestClientException e) {
+            throw new ServerUnreachableException("Server unreachable");
+        }
+
+        return authenticatedUser;
     }
 
     public User getUser() {
