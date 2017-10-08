@@ -8,8 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.ConnectException;
-
 /**
  * Created by softish on 2017-10-04.
  */

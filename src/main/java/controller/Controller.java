@@ -24,6 +24,8 @@ public class Controller implements Observer {
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
         timerModel.subscribe(this);
         apiDriver = new APIDriver();
+        ketchupDesktopView.disableChangeStateButton();
+        ketchupDesktopView.disableResetButton();
     }
 
     public void changeTimerState() {
@@ -55,6 +57,10 @@ public class Controller implements Observer {
 
             try {
                 apiDriver.authenticate(usernamePassword.getKey(), usernamePassword.getValue());
+                ketchupDesktopView.disableSignInButton();
+                ketchupDesktopView.disableRegisterButton();
+                ketchupDesktopView.enableChangeStateButton();
+                ketchupDesktopView.enableResetButton();
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }

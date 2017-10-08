@@ -122,6 +122,22 @@ public class KetchupDesktopView extends BorderPane {
         resetButton.setDisable(true);
     }
 
+    public void enableSignInButton() {
+        signInButton.setDisable(false);
+    }
+
+    public void disableSignInButton() {
+        signInButton.setDisable(true);
+    }
+
+    public void enableRegisterButton() {
+        signInButton.setDisable(false);
+    }
+
+    public void disableRegisterButton() {
+        registerButton.setDisable(true);
+    }
+
     public Optional<Pair<String, String>> showLoginDialog() {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Sign In Dialog");
