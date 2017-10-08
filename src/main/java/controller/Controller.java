@@ -61,6 +61,14 @@ public class Controller implements Observer {
         });
     }
 
+    public void registerHandler() {
+        Optional<Pair<String, String>> result = ketchupDesktopView.showRegisterDialog();
+
+        result.ifPresent(usernamePassword -> {
+            apiDriver.register(usernamePassword.getKey(), usernamePassword.getValue());
+        });
+    }
+
     @Override
     public void update(TimerEvent timerEvent) {
         if (timerEvent.equals(TimerEvent.TICK)) {

@@ -3,6 +3,7 @@ package view;
 import controller.Controller;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -19,6 +20,7 @@ public class KetchupDesktopView extends BorderPane {
     private Button resetButton;
     private Button changeStateButton;
     private Button signInButton;
+    private Button registerButton;
     private Label timerLabel;
 
     public KetchupDesktopView() {
@@ -29,6 +31,7 @@ public class KetchupDesktopView extends BorderPane {
         resetButton = new Button("Reset");
         changeStateButton = new Button("Start");
         signInButton = new Button("Sign in");
+        registerButton = new Button("Register");
 
         timerLabel = new Label("00:00:00");
         timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
@@ -42,7 +45,10 @@ public class KetchupDesktopView extends BorderPane {
 
         FlowPane userButtonsPane = new FlowPane();
         userButtonsPane.getChildren().add(signInButton);
+        userButtonsPane.getChildren().add(registerButton);
         userButtonsPane.setAlignment(Pos.TOP_RIGHT);
+        userButtonsPane.setOrientation(Orientation.VERTICAL);
+        userButtonsPane.setVgap(10);
         userButtonsPane.setPadding(new Insets(25, 25, 25, 25));
 
         this.setCenter(timerLabel);
@@ -65,6 +71,7 @@ public class KetchupDesktopView extends BorderPane {
         changeStateButton.setOnAction(event -> controller.changeTimerState());
         resetButton.setOnAction(event -> controller.resetTimer());
         signInButton.setOnAction(event -> controller.loginHandler());
+        registerButton.setOnAction(event -> controller.registerHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
         this.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
@@ -142,6 +149,41 @@ public class KetchupDesktopView extends BorderPane {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
+                return new Pair<>(username.getText(), password.getText());
+            }
+            return null;
+        });
+
+        return dialog.showAndWait();
+    }
+
+    public Optional<Pair<String, String>> showRegisterDialog() {
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Register Dialog");
+        dialog.setHeaderText(null);
+
+        ButtonType registerButtonType = new ButtonType("Register", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(registerButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        PasswordField password = new PasswordField();
+        password.setPromptText("Password");
+
+        grid.add(new Label("Username:"), 0, 0);
+        grid.add(username, 1, 0);
+        grid.add(new Label("Password:"), 0, 1);
+        grid.add(password, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == registerButtonType) {
                 return new Pair<>(username.getText(), password.getText());
             }
             return null;
