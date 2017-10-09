@@ -28,11 +28,16 @@ public class APIDriver {
         TimedSession timedSession = new TimedSession(userId, sessionDuration);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<TimedSession> request = new HttpEntity<>(timedSession);
-        restTemplate.postForObject(BASE_URL+"/session/save", request, TimedSession.class);
+
+        try {
+            restTemplate.postForObject(BASE_URL+"/session/save", request, TimedSession.class);
+        } catch (RestClientException e) {
+            throw new ServerUnreachableException("Server unreachable");
+        }
     }
 
     public void saveSession(int duration) {
-        AuthenticatedUser user = authenticate("KetchupUser", "KetchupUser");
+        AuthenticatedUser user = authenticate(this.user.getUserName(), this.user.getPassword());
         saveSession(user.getId(), duration);
     }
 

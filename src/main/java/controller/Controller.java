@@ -94,7 +94,12 @@ public class Controller implements Observer {
             ketchupDesktopView.displayTimeOut();
             ketchupDesktopView.disableChangeStateButton();
             ketchupDesktopView.enableResetButton();
-            apiDriver.saveSession(timerModel.getSessionDurationMillis());
+            
+            try{
+                apiDriver.saveSession(timerModel.getSessionDurationMillis());
+            } catch (ServerUnreachableException e) {
+                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+            }
         }
         if (timerEvent.equals(TimerEvent.RESET)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
