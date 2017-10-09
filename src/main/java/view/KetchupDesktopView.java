@@ -169,19 +169,9 @@ public class KetchupDesktopView extends BorderPane {
         Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
         loginButton.setDisable(true);
 
-        username.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                loginButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty());
-            }
-        });
+        username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
 
-        password.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                loginButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty());
-            }
-        });
+        password.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
@@ -221,19 +211,9 @@ public class KetchupDesktopView extends BorderPane {
         Node registerButton = dialog.getDialogPane().lookupButton(registerButtonType);
         registerButton.setDisable(true);
 
-        username.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                registerButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty());
-            }
-        });
+        username.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
 
-        password.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                registerButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty());
-            }
-        });
+        password.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == registerButtonType) {
