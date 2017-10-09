@@ -170,8 +170,9 @@ public class KetchupDesktopView extends BorderPane {
         loginButton.setDisable(true);
 
         username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
-
         password.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
+
+        username.requestFocus();
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
@@ -212,8 +213,8 @@ public class KetchupDesktopView extends BorderPane {
         registerButton.setDisable(true);
 
         username.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
-
         password.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
+        username.requestFocus();
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == registerButtonType) {
