@@ -1,6 +1,8 @@
 package controller;
 
+import exception.ErroneousCredentialsException;
 import exception.ServerUnreachableException;
+import exception.UserAlreadyExistsException;
 import javafx.util.Pair;
 import model.Observer;
 import model.TimeFormatter;
@@ -63,6 +65,8 @@ public class Controller implements Observer {
                 ketchupDesktopView.enableResetButton();
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+            } catch (ErroneousCredentialsException e) {
+                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }
         });
     }
@@ -71,7 +75,13 @@ public class Controller implements Observer {
         Optional<Pair<String, String>> result = ketchupDesktopView.showRegisterDialog();
 
         result.ifPresent(usernamePassword -> {
-            apiDriver.register(usernamePassword.getKey(), usernamePassword.getValue());
+            try {
+                apiDriver.register(usernamePassword.getKey(), usernamePassword.getValue());
+            } catch (ServerUnreachableException e) {
+                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+            } catch (UserAlreadyExistsException e) {
+                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+            }
         });
     }
 
