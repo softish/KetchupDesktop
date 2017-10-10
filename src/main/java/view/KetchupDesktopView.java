@@ -2,8 +2,8 @@ package view;
 
 import controller.Controller;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -25,6 +25,9 @@ public class KetchupDesktopView extends BorderPane {
     private Button signInButton;
     private Button registerButton;
     private Label timerLabel;
+    private Button addActivityTagButton;
+    private ComboBox<String> activityTagComboBox;
+    private ObservableList<String> activityTags;
 
     public KetchupDesktopView() {
         initView();
@@ -54,7 +57,27 @@ public class KetchupDesktopView extends BorderPane {
         userButtonsPane.setVgap(10);
         userButtonsPane.setPadding(new Insets(25, 25, 25, 25));
 
-        this.setCenter(timerLabel);
+        activityTags = FXCollections.observableArrayList(
+                "Some neat activity"
+        );
+
+        activityTagComboBox = new ComboBox<>(activityTags);
+        addActivityTagButton = new Button("Add tag");
+
+        FlowPane activityTagPane = new FlowPane();
+        activityTagPane.setHgap(10);
+        activityTagPane.setAlignment(Pos.CENTER);
+        activityTagPane.getChildren().add(activityTagComboBox);
+        activityTagPane.getChildren().add(addActivityTagButton);
+
+        FlowPane centerPane = new FlowPane();
+        centerPane.setOrientation(Orientation.VERTICAL);
+        centerPane.setVgap(10);
+        centerPane.setAlignment(Pos.CENTER);
+        centerPane.getChildren().add(timerLabel);
+        centerPane.getChildren().add(activityTagPane);
+
+        this.setCenter(centerPane);
         this.setBottom(timerButtonsPane);
         this.setTop(userButtonsPane);
 
@@ -75,6 +98,7 @@ public class KetchupDesktopView extends BorderPane {
         resetButton.setOnAction(event -> controller.resetTimer());
         signInButton.setOnAction(event -> controller.loginHandler());
         registerButton.setOnAction(event -> controller.registerHandler());
+        addActivityTagButton.setOnAction(event -> controller.addTagHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
         this.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
@@ -107,6 +131,14 @@ public class KetchupDesktopView extends BorderPane {
         alert.setContentText(message);
 
         alert.showAndWait();
+    }
+
+    public void updateTags(String tag) {
+        Platform.runLater(() -> addTag(tag));
+    }
+
+    public void addTag(String aTag) {
+        activityTags.add(aTag);
     }
 
     public void enableChangeStateButton() {
@@ -222,6 +254,15 @@ public class KetchupDesktopView extends BorderPane {
             }
             return null;
         });
+
+        return dialog.showAndWait();
+    }
+
+    public Optional<String> showAddTagDialog() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Add tag Dialog");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Enter tag:");
 
         return dialog.showAndWait();
     }

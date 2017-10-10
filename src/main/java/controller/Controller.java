@@ -85,6 +85,11 @@ public class Controller implements Observer {
         });
     }
 
+    public void addTagHandler() {
+        Optional<String> tag = ketchupDesktopView.showAddTagDialog();
+        tag.ifPresent(theTag -> ketchupDesktopView.updateTags(theTag));
+    }
+
     @Override
     public void update(TimerEvent timerEvent) {
         if (timerEvent.equals(TimerEvent.TICK)) {
@@ -94,7 +99,7 @@ public class Controller implements Observer {
             ketchupDesktopView.displayTimeOut();
             ketchupDesktopView.disableChangeStateButton();
             ketchupDesktopView.enableResetButton();
-            
+
             try{
                 apiDriver.saveSession(timerModel.getSessionDurationMillis());
             } catch (ServerUnreachableException e) {
