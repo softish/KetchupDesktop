@@ -27,7 +27,6 @@ public class KetchupDesktopView extends BorderPane {
     private Label timerLabel;
     private Button addActivityTagButton;
     private ComboBox<String> activityTagComboBox;
-    private ObservableList<String> activityTags;
 
     public KetchupDesktopView() {
         initView();
@@ -57,7 +56,7 @@ public class KetchupDesktopView extends BorderPane {
         userButtonsPane.setVgap(10);
         userButtonsPane.setPadding(new Insets(25, 25, 25, 25));
 
-        activityTags = FXCollections.observableArrayList(
+        ObservableList<String> activityTags = FXCollections.observableArrayList(
                 "Some neat activity"
         );
 
@@ -138,7 +137,7 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     public void addTag(String aTag) {
-        activityTags.add(aTag);
+        activityTagComboBox.getItems().add(aTag);
     }
 
     public void enableChangeStateButton() {
