@@ -33,6 +33,13 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     private void initView() {
+        initGuiComponents();
+        composeGuiComponentLayout();
+
+        enableDarkTheme();
+    }
+
+    private void initGuiComponents() {
         resetButton = new Button("Reset");
         changeStateButton = new Button("Start");
         signInButton = new Button("Sign in");
@@ -41,13 +48,25 @@ public class KetchupDesktopView extends BorderPane {
         timerLabel = new Label("00:00:00");
         timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
+        ObservableList<String> activityTags = FXCollections.observableArrayList(
+                "Some neat activity"
+        );
+
+        activityTagComboBox = new ComboBox<>(activityTags);
+        addActivityTagButton = new Button("Add tag");
+    }
+
+    private FlowPane getTimerButtonsPane() {
         FlowPane timerButtonsPane = new FlowPane();
         timerButtonsPane.getChildren().add(resetButton);
         timerButtonsPane.getChildren().add(changeStateButton);
         timerButtonsPane.setHgap(10);
         timerButtonsPane.setPadding(new Insets(0, 0, 25, 0));
         timerButtonsPane.setAlignment(Pos.CENTER);
+        return timerButtonsPane;
+    }
 
+    private FlowPane getUserButtonsPane() {
         FlowPane userButtonsPane = new FlowPane();
         userButtonsPane.getChildren().add(signInButton);
         userButtonsPane.getChildren().add(registerButton);
@@ -55,14 +74,10 @@ public class KetchupDesktopView extends BorderPane {
         userButtonsPane.setOrientation(Orientation.VERTICAL);
         userButtonsPane.setVgap(10);
         userButtonsPane.setPadding(new Insets(25, 25, 25, 25));
+        return userButtonsPane;
+    }
 
-        ObservableList<String> activityTags = FXCollections.observableArrayList(
-                "Some neat activity"
-        );
-
-        activityTagComboBox = new ComboBox<>(activityTags);
-        addActivityTagButton = new Button("Add tag");
-
+    private FlowPane getCenterPane() {
         FlowPane activityTagPane = new FlowPane();
         activityTagPane.setHgap(10);
         activityTagPane.setAlignment(Pos.CENTER);
@@ -75,12 +90,13 @@ public class KetchupDesktopView extends BorderPane {
         centerPane.setAlignment(Pos.CENTER);
         centerPane.getChildren().add(timerLabel);
         centerPane.getChildren().add(activityTagPane);
+        return centerPane;
+    }
 
-        this.setCenter(centerPane);
-        this.setBottom(timerButtonsPane);
-        this.setTop(userButtonsPane);
-
-        enableDarkTheme();
+    private void composeGuiComponentLayout() {
+        this.setCenter(getCenterPane());
+        this.setBottom(getTimerButtonsPane());
+        this.setTop(getUserButtonsPane());
     }
 
     public void enableDarkTheme() {
