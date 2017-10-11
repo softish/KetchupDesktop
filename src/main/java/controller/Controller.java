@@ -36,6 +36,11 @@ public class Controller implements Observer {
             ketchupDesktopView.setChangeStateButtonText("Start");
             ketchupDesktopView.enableResetButton();
         } else {
+            if(!ketchupDesktopView.isTaskSet()) {
+                ketchupDesktopView.showErrorDialog("Error", "Task must be set!");
+                return;
+            }
+
             timerModel.startTimer();
             ketchupDesktopView.setChangeStateButtonText("Stop");
             ketchupDesktopView.disableResetButton();
@@ -101,7 +106,7 @@ public class Controller implements Observer {
             ketchupDesktopView.enableResetButton();
 
             try{
-                apiDriver.saveSession(timerModel.getSessionDurationMillis());
+                apiDriver.saveSession(timerModel.getSessionDurationMillis(), ketchupDesktopView.getTask());
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }

@@ -24,21 +24,21 @@ public class APIDriver {
 
     private static final String BASE_URL = "http://localhost:8080";
 
-    public void saveSession(long userId, long sessionDuration) {
-        TimedSession timedSession = new TimedSession(userId, sessionDuration);
+    public void saveSession(long userId, long sessionDuration, String task) {
+        TimedSession timedSession = new TimedSession(userId, sessionDuration, task);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<TimedSession> request = new HttpEntity<>(timedSession);
 
         try {
-            restTemplate.postForObject(BASE_URL+"/session/save", request, TimedSession.class);
+            restTemplate.postForObject(BASE_URL + "/session/save", request, TimedSession.class);
         } catch (RestClientException e) {
             throw new ServerUnreachableException("Server unreachable");
         }
     }
 
-    public void saveSession(int duration) {
+    public void saveSession(int duration, String task) {
         AuthenticatedUser user = authenticate(this.user.getUserName(), this.user.getPassword());
-        saveSession(user.getId(), duration);
+        saveSession(user.getId(), duration, task);
     }
 
     public void register(String username, String password) {
@@ -49,7 +49,7 @@ public class APIDriver {
         restTemplate.setErrorHandler(new ResponseErrorHandler() {
             @Override
             public boolean hasError(ClientHttpResponse response) throws IOException {
-                if(response.getStatusCode().equals(HttpStatus.CONFLICT)) {
+                if (response.getStatusCode().equals(HttpStatus.CONFLICT)) {
                     throw new UserAlreadyExistsException("User already exists");
                 }
                 return false;
@@ -62,7 +62,7 @@ public class APIDriver {
         });
 
         try {
-            restTemplate.postForObject(BASE_URL+"/user/register", request, User.class);
+            restTemplate.postForObject(BASE_URL + "/user/register", request, User.class);
         } catch (RestClientException e) {
             throw new ServerUnreachableException("Server unreachable");
         }
@@ -77,7 +77,7 @@ public class APIDriver {
         restTemplate.setErrorHandler(new ResponseErrorHandler() {
             @Override
             public boolean hasError(ClientHttpResponse response) throws IOException {
-                if(response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
                     throw new ErroneousCredentialsException("No such user");
                 }
                 return false;
@@ -90,7 +90,7 @@ public class APIDriver {
         });
 
         try {
-            authenticatedUser = restTemplate.postForObject(BASE_URL+"/user/authenticate", request, AuthenticatedUser.class);
+            authenticatedUser = restTemplate.postForObject(BASE_URL + "/user/authenticate", request, AuthenticatedUser.class);
         } catch (RestClientException e) {
             throw new ServerUnreachableException("Server unreachable");
         }

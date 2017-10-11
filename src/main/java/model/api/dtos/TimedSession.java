@@ -10,10 +10,17 @@ public class TimedSession {
 
     private long userId;
     private long duration;
+    private String task;
 
     public TimedSession(long userId, long duration) {
         this.userId = userId;
         this.duration = duration;
+    }
+
+    public TimedSession(long userId, long duration, String task) {
+        this.userId = userId;
+        this.duration = duration;
+        this.task = task;
     }
 
     public long getUserId() {
@@ -30,5 +37,13 @@ public class TimedSession {
 
     public void setDuration(long duration) {
         this.duration = duration;
+    }
+
+    public String getTask() {
+        return task;
+    }
+
+    public void setTask(String task) {
+        this.task = task;
     }
 }

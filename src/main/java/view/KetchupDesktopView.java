@@ -27,6 +27,8 @@ public class KetchupDesktopView extends BorderPane {
     private Label selectedTaskLabel;
     private Label currentTaskLabel;
 
+    private static final String TASK_NOT_SET = "[not set]";
+
     public KetchupDesktopView() {
         initView();
     }
@@ -49,7 +51,7 @@ public class KetchupDesktopView extends BorderPane {
 
         setTaskButton = new Button("Set task");
         currentTaskLabel = new Label("Task: ");
-        selectedTaskLabel = new Label("[not set]");
+        selectedTaskLabel = new Label(TASK_NOT_SET);
         selectedTaskLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
     }
 
@@ -162,6 +164,14 @@ public class KetchupDesktopView extends BorderPane {
 
     public void setTask(String task) {
         selectedTaskLabel.setText(task);
+    }
+
+    public String getTask() {
+        return selectedTaskLabel.getText();
+    }
+
+    public boolean isTaskSet() {
+        return !selectedTaskLabel.getText().equals(TASK_NOT_SET);
     }
 
     public void enableChangeStateButton() {
