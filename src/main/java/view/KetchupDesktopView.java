@@ -78,6 +78,10 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     private FlowPane getCenterPane() {
+        FlowPane timerLabelPane = new FlowPane();
+        timerLabelPane.getChildren().add(timerLabel);
+        timerLabelPane.setAlignment(Pos.CENTER);
+
         FlowPane activityTagPane = new FlowPane();
         activityTagPane.setHgap(10);
         activityTagPane.setAlignment(Pos.CENTER);
@@ -88,7 +92,7 @@ public class KetchupDesktopView extends BorderPane {
         centerPane.setOrientation(Orientation.VERTICAL);
         centerPane.setVgap(10);
         centerPane.setAlignment(Pos.CENTER);
-        centerPane.getChildren().add(timerLabel);
+        centerPane.getChildren().add(timerLabelPane);
         centerPane.getChildren().add(activityTagPane);
         return centerPane;
     }
