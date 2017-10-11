@@ -2,8 +2,6 @@ package view;
 
 import controller.Controller;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -25,8 +23,9 @@ public class KetchupDesktopView extends BorderPane {
     private Button signInButton;
     private Button registerButton;
     private Label timerLabel;
-    private Button addActivityTagButton;
-    private ComboBox<String> activityTagComboBox;
+    private Button setTaskButton;
+    private Label selectedTaskLabel;
+    private Label currentTaskLabel;
 
     public KetchupDesktopView() {
         initView();
@@ -48,12 +47,10 @@ public class KetchupDesktopView extends BorderPane {
         timerLabel = new Label("00:00:00");
         timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
 
-        ObservableList<String> activityTags = FXCollections.observableArrayList(
-                "Some neat activity"
-        );
-
-        activityTagComboBox = new ComboBox<>(activityTags);
-        addActivityTagButton = new Button("Add tag");
+        setTaskButton = new Button("Set task");
+        currentTaskLabel = new Label("Task: ");
+        selectedTaskLabel = new Label("[not set]");
+        selectedTaskLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
     }
 
     private FlowPane getTimerButtonsPane() {
@@ -80,20 +77,27 @@ public class KetchupDesktopView extends BorderPane {
     private FlowPane getCenterPane() {
         FlowPane timerLabelPane = new FlowPane();
         timerLabelPane.getChildren().add(timerLabel);
+        timerLabelPane.setVgap(10);
         timerLabelPane.setAlignment(Pos.CENTER);
 
-        FlowPane activityTagPane = new FlowPane();
-        activityTagPane.setHgap(10);
-        activityTagPane.setAlignment(Pos.CENTER);
-        activityTagPane.getChildren().add(activityTagComboBox);
-        activityTagPane.getChildren().add(addActivityTagButton);
+        FlowPane taskLabelPane = new FlowPane();
+        taskLabelPane.getChildren().addAll(currentTaskLabel, selectedTaskLabel);
+        taskLabelPane.setVgap(10);
+        taskLabelPane.setAlignment(Pos.CENTER);
+
+        FlowPane taskPane = new FlowPane();
+        taskPane.setHgap(10);
+        taskPane.setVgap(10);
+        taskPane.setAlignment(Pos.CENTER);
+        taskPane.getChildren().add(setTaskButton);
+        taskPane.getChildren().add(taskLabelPane);
 
         FlowPane centerPane = new FlowPane();
         centerPane.setOrientation(Orientation.VERTICAL);
         centerPane.setVgap(10);
         centerPane.setAlignment(Pos.CENTER);
         centerPane.getChildren().add(timerLabelPane);
-        centerPane.getChildren().add(activityTagPane);
+        centerPane.getChildren().add(taskPane);
         return centerPane;
     }
 
@@ -117,7 +121,7 @@ public class KetchupDesktopView extends BorderPane {
         resetButton.setOnAction(event -> controller.resetTimer());
         signInButton.setOnAction(event -> controller.loginHandler());
         registerButton.setOnAction(event -> controller.registerHandler());
-        addActivityTagButton.setOnAction(event -> controller.addTagHandler());
+        setTaskButton.setOnAction(event -> controller.addTaskHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
         this.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
@@ -152,12 +156,12 @@ public class KetchupDesktopView extends BorderPane {
         alert.showAndWait();
     }
 
-    public void updateTags(String tag) {
-        Platform.runLater(() -> addTag(tag));
+    public void updateTask(String task) {
+        Platform.runLater(() -> setTask(task));
     }
 
-    public void addTag(String aTag) {
-        activityTagComboBox.getItems().add(aTag);
+    public void setTask(String task) {
+        selectedTaskLabel.setText(task);
     }
 
     public void enableChangeStateButton() {
@@ -277,11 +281,11 @@ public class KetchupDesktopView extends BorderPane {
         return dialog.showAndWait();
     }
 
-    public Optional<String> showAddTagDialog() {
+    public Optional<String> showAddTaskDialog() {
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Add tag Dialog");
+        dialog.setTitle("Add task Dialog");
         dialog.setHeaderText(null);
-        dialog.setContentText("Enter tag:");
+        dialog.setContentText("Enter task:");
 
         return dialog.showAndWait();
     }

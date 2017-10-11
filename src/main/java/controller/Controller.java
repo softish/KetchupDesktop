@@ -85,9 +85,9 @@ public class Controller implements Observer {
         });
     }
 
-    public void addTagHandler() {
-        Optional<String> tag = ketchupDesktopView.showAddTagDialog();
-        tag.ifPresent(theTag -> ketchupDesktopView.updateTags(theTag));
+    public void addTaskHandler() {
+        Optional<String> tag = ketchupDesktopView.showAddTaskDialog();
+        tag.ifPresent(theTag -> ketchupDesktopView.updateTask(theTag));
     }
 
     @Override
