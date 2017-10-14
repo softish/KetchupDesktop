@@ -1,3 +1,6 @@
+# Custom file types
+*.ser
+
 # IntelliJ
 .idea/
 *.iml

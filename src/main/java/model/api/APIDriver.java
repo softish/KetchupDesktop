@@ -21,6 +21,7 @@ import java.io.IOException;
 public class APIDriver {
 
     private User user;
+    private AuthenticatedUser authenticatedUser;
 
     private static final String BASE_URL = "http://localhost:8080";
 
@@ -37,8 +38,10 @@ public class APIDriver {
     }
 
     public void saveSession(int duration, String task) {
-        AuthenticatedUser user = authenticate(this.user.getUserName(), this.user.getPassword());
-        saveSession(user.getId(), duration, task);
+        if(authenticatedUser == null) {
+            authenticatedUser = authenticate(this.user.getUserName(), this.user.getPassword());
+        }
+        saveSession(authenticatedUser.getId(), duration, task);
     }
 
     public void register(String username, String password) {
@@ -104,5 +107,13 @@ public class APIDriver {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public AuthenticatedUser getAuthenticatedUser() {
+        return authenticatedUser;
+    }
+
+    public void setAuthenticatedUser(AuthenticatedUser authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
     }
 }

@@ -1,14 +1,13 @@
 package controller;
 
 import exception.ErroneousCredentialsException;
+import exception.NoCachedSessionException;
 import exception.ServerUnreachableException;
 import exception.UserAlreadyExistsException;
 import javafx.util.Pair;
-import model.Observer;
-import model.TimeFormatter;
-import model.TimerEvent;
-import model.TimerModel;
+import model.*;
 import model.api.APIDriver;
+import model.api.dtos.AuthenticatedUser;
 import model.api.dtos.User;
 import view.KetchupDesktopView;
 
@@ -28,10 +27,17 @@ public class Controller implements Observer {
         apiDriver = new APIDriver();
         ketchupDesktopView.disableChangeStateButton();
         ketchupDesktopView.disableResetButton();
+
+        try {
+            apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
+            enableUIOnAuthentication();
+        } catch (NoCachedSessionException e) {
+
+        }
     }
 
     public void changeTimerState() {
-        if(timerModel.isTimerActive()) {
+        if (timerModel.isTimerActive()) {
             timerModel.stopTimer();
             ketchupDesktopView.setChangeStateButtonText("Start");
             ketchupDesktopView.enableResetButton();
@@ -63,17 +69,23 @@ public class Controller implements Observer {
             apiDriver.setUser(user);
 
             try {
-                apiDriver.authenticate(usernamePassword.getKey(), usernamePassword.getValue());
-                ketchupDesktopView.disableSignInButton();
-                ketchupDesktopView.disableRegisterButton();
-                ketchupDesktopView.enableChangeStateButton();
-                ketchupDesktopView.enableResetButton();
+                AuthenticatedUser authenticatedUser = apiDriver.authenticate(usernamePassword.getKey(), usernamePassword.getValue());
+                enableUIOnAuthentication();
+                apiDriver.setAuthenticatedUser(authenticatedUser);
+                SessionCacheHandler.save(authenticatedUser);
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             } catch (ErroneousCredentialsException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }
         });
+    }
+
+    private void enableUIOnAuthentication() {
+        ketchupDesktopView.disableSignInButton();
+        ketchupDesktopView.disableRegisterButton();
+        ketchupDesktopView.enableChangeStateButton();
+        ketchupDesktopView.enableResetButton();
     }
 
     public void registerHandler() {
@@ -114,7 +126,7 @@ public class Controller implements Observer {
         if (timerEvent.equals(TimerEvent.RESET)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
             ketchupDesktopView.enableChangeStateButton();
-            if(!timerModel.isTimerActive()) {
+            if (!timerModel.isTimerActive()) {
                 ketchupDesktopView.setChangeStateButtonText("Start");
             }
         }

@@ -3,10 +3,14 @@ package model.api.dtos;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by softish on 2017-10-06.
  */
-public class AuthenticatedUser {
+public class AuthenticatedUser implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private long id;
     private String userName;
