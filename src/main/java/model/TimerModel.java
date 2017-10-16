@@ -17,10 +17,10 @@ public class TimerModel implements Subject {
     /**
      * Constructs a timer with time out at the provided timeTargetMillis.
      *
-     * @param timeTarget when the time out should occur in minutes
+     * @param timeTargetMillis when the time out should occur in milliseconds
      */
-    public TimerModel(long timeTarget) {
-        this.timeTargetMillis = timeTarget * 60 * 1000;
+    public TimerModel(long timeTargetMillis) {
+        this.timeTargetMillis = timeTargetMillis;
         timerModelTask = new TimerModelTask(this.timeTargetMillis, this);
         timeLeft = this.timeTargetMillis;
         observers = new ArrayList<>();

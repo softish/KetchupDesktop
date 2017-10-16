@@ -14,7 +14,7 @@ public class APIDriverTest {
     @Test
     public void testSaveSession() throws Exception {
         APIDriver apiDriver = new APIDriver();
-        apiDriver.saveSession(1, 20);
+        apiDriver.saveSession(1, 20 + "");
     }
 
     @Test
