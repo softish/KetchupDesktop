@@ -10,17 +10,21 @@ import model.api.APIDriver;
 import model.api.dtos.AuthenticatedUser;
 import model.api.dtos.User;
 import view.KetchupDesktopView;
+import view.SceneManager;
+import view.SignInView;
 
 import java.util.Optional;
 
 public class Controller implements Observer {
 
     private KetchupDesktopView ketchupDesktopView;
+    private SignInView signInView;
     private TimerModel timerModel;
     private APIDriver apiDriver;
 
-    public Controller(KetchupDesktopView ketchupDesktopView, TimerModel timerModel) {
+    public Controller(KetchupDesktopView ketchupDesktopView, SignInView signInView, TimerModel timerModel) {
         this.ketchupDesktopView = ketchupDesktopView;
+        this.signInView = signInView;
         this.timerModel = timerModel;
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
         timerModel.subscribe(this);
@@ -31,8 +35,9 @@ public class Controller implements Observer {
         try {
             apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
             enableUIOnAuthentication();
+            SceneManager.getInstance().activateScene(ketchupDesktopView);
         } catch (NoCachedSessionException e) {
-
+            SceneManager.getInstance().activateScene(signInView);
         }
     }
 
@@ -62,7 +67,7 @@ public class Controller implements Observer {
     }
 
     public void loginHandler() {
-        Optional<Pair<String, String>> result = ketchupDesktopView.showLoginDialog();
+        Optional<Pair<String, String>> result = signInView.showLoginDialog();
 
         result.ifPresent(usernamePassword -> {
             User user = new User(usernamePassword.getKey(), usernamePassword.getValue());
@@ -73,6 +78,7 @@ public class Controller implements Observer {
                 enableUIOnAuthentication();
                 apiDriver.setAuthenticatedUser(authenticatedUser);
                 SessionCacheHandler.save(authenticatedUser);
+                SceneManager.getInstance().activateScene(ketchupDesktopView);
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             } catch (ErroneousCredentialsException e) {
@@ -89,7 +95,7 @@ public class Controller implements Observer {
     }
 
     public void registerHandler() {
-        Optional<Pair<String, String>> result = ketchupDesktopView.showRegisterDialog();
+        Optional<Pair<String, String>> result = signInView.showRegisterDialog();
 
         result.ifPresent(usernamePassword -> {
             try {

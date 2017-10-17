@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.TimerModel;
 import view.KetchupDesktopView;
+import view.SceneManager;
+import view.SignInView;
 
 /**
  * Bootstraps the application.
@@ -34,16 +36,16 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        SceneManager.getInstance().setPrimaryStage(primaryStage);
         KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
-        Scene scene = new Scene(ketchupDesktopView, 360, 640);
+        SignInView signInView = new SignInView();
         TimerModel timerModel = new TimerModel(timeTargetMillis);
-        Controller controller = new Controller(ketchupDesktopView, timerModel);
+        Controller controller = new Controller(ketchupDesktopView, signInView, timerModel);
         ketchupDesktopView.addEventHandlers(controller);
+        signInView.addEventHandlers(controller);
 
         primaryStage.setTitle("KetchupDesktop");
-        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             event.consume();
             controller.exitApplication();

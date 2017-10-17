@@ -5,14 +5,15 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
-import javafx.util.Pair;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 
 import java.util.Optional;
 
@@ -65,17 +66,6 @@ public class KetchupDesktopView extends BorderPane {
         return timerButtonsPane;
     }
 
-    private FlowPane getUserButtonsPane() {
-        FlowPane userButtonsPane = new FlowPane();
-        userButtonsPane.getChildren().add(signInButton);
-        userButtonsPane.getChildren().add(registerButton);
-        userButtonsPane.setAlignment(Pos.TOP_RIGHT);
-        userButtonsPane.setOrientation(Orientation.VERTICAL);
-        userButtonsPane.setVgap(10);
-        userButtonsPane.setPadding(new Insets(25, 25, 25, 25));
-        return userButtonsPane;
-    }
-
     private FlowPane getCenterPane() {
         FlowPane timerLabelPane = new FlowPane();
         timerLabelPane.getChildren().add(timerLabel);
@@ -106,7 +96,6 @@ public class KetchupDesktopView extends BorderPane {
     private void composeGuiComponentLayout() {
         this.setCenter(getCenterPane());
         this.setBottom(getTimerButtonsPane());
-        this.setTop(getUserButtonsPane());
     }
 
     public void enableDarkTheme() {
@@ -126,11 +115,13 @@ public class KetchupDesktopView extends BorderPane {
         setTaskButton.setOnAction(event -> controller.addTaskHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+        /*
         this.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if (keyCodeCombination.match(event)) {
                 controller.changeTimerState();
             }
         });
+        */
     }
 
     public void setChangeStateButtonText(String text) {
@@ -204,91 +195,6 @@ public class KetchupDesktopView extends BorderPane {
 
     public void disableRegisterButton() {
         registerButton.setDisable(true);
-    }
-
-    public Optional<Pair<String, String>> showLoginDialog() {
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Sign In Dialog");
-        dialog.setHeaderText(null);
-
-        ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField username = new TextField();
-        username.setPromptText("Username");
-        PasswordField password = new PasswordField();
-        password.setPromptText("Password");
-
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(username, 1, 0);
-        grid.add(new Label("Password:"), 0, 1);
-        grid.add(password, 1, 1);
-
-        dialog.getDialogPane().setContent(grid);
-
-        Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
-        loginButton.setDisable(true);
-
-        username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
-        password.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
-
-        username.requestFocus();
-
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == loginButtonType) {
-                return new Pair<>(username.getText(), password.getText());
-            }
-            return null;
-        });
-
-        return dialog.showAndWait();
-    }
-
-    public Optional<Pair<String, String>> showRegisterDialog() {
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Register Dialog");
-        dialog.setHeaderText(null);
-
-        ButtonType registerButtonType = new ButtonType("Register", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(registerButtonType, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField username = new TextField();
-        username.setPromptText("Username");
-        PasswordField password = new PasswordField();
-        password.setPromptText("Password");
-
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(username, 1, 0);
-        grid.add(new Label("Password:"), 0, 1);
-        grid.add(password, 1, 1);
-
-        dialog.getDialogPane().setContent(grid);
-
-        Node registerButton = dialog.getDialogPane().lookupButton(registerButtonType);
-        registerButton.setDisable(true);
-
-        username.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
-        password.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
-        username.requestFocus();
-
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == registerButtonType) {
-                return new Pair<>(username.getText(), password.getText());
-            }
-            return null;
-        });
-
-        return dialog.showAndWait();
     }
 
     public Optional<String> showAddTaskDialog() {
