@@ -21,7 +21,7 @@ public class KetchupDesktopView extends BorderPane {
 
     private Button resetButton;
     private Button changeStateButton;
-    private Button signInButton;
+    private Button signOutButton;
     private Label timerLabel;
     private Button setTaskButton;
     private Label selectedTaskLabel;
@@ -42,7 +42,7 @@ public class KetchupDesktopView extends BorderPane {
     private void initGuiComponents() {
         resetButton = new Button("Reset");
         changeStateButton = new Button("Start");
-        signInButton = new Button("Sign in");
+        signOutButton = new Button("Sign out");
         timerLabel = new Label("00:00:00");
         setTaskButton = new Button("Set task");
         currentTaskLabel = new Label("Task: ");
@@ -58,6 +58,13 @@ public class KetchupDesktopView extends BorderPane {
         timerButtonsPane.setPadding(new Insets(0, 0, 25, 0));
         timerButtonsPane.setAlignment(Pos.CENTER);
         return timerButtonsPane;
+    }
+
+    private FlowPane getSignOutButtonPane() {
+        FlowPane signOutButtonPane = new FlowPane();
+        signOutButtonPane.setPadding(new Insets(25, 25, 25, 25));
+        signOutButtonPane.getChildren().add(signOutButton);
+        return signOutButtonPane;
     }
 
     private FlowPane getCenterPane() {
@@ -88,6 +95,7 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     private void composeGuiComponentLayout() {
+        this.setTop(getSignOutButtonPane());
         this.setCenter(getCenterPane());
         this.setBottom(getTimerButtonsPane());
     }
@@ -104,7 +112,7 @@ public class KetchupDesktopView extends BorderPane {
     public void addEventHandlers(Controller controller) {
         changeStateButton.setOnAction(event -> controller.changeTimerState());
         resetButton.setOnAction(event -> controller.resetTimer());
-        signInButton.setOnAction(event -> controller.loginHandler());
+        signOutButton.setOnAction(event -> controller.signOutHandler());
         setTaskButton.setOnAction(event -> controller.addTaskHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
@@ -172,14 +180,6 @@ public class KetchupDesktopView extends BorderPane {
 
     public void disableResetButton() {
         resetButton.setDisable(true);
-    }
-
-    public void enableSignInButton() {
-        signInButton.setDisable(false);
-    }
-
-    public void disableSignInButton() {
-        signInButton.setDisable(true);
     }
 
     public Optional<String> showAddTaskDialog() {

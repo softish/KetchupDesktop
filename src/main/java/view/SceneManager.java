@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by softish on 2017-10-16.
  */
@@ -14,10 +17,12 @@ public class SceneManager {
     private double width = 360;
     private double height = 640;
 
+    private Map<String, Scene> sceneMap;
     private Stage primaryStage;
     private static SceneManager sceneManager;
 
     private SceneManager() {
+        sceneMap = new HashMap<>();
     }
 
     public static SceneManager getInstance() {
@@ -38,9 +43,12 @@ public class SceneManager {
         this.primaryStage = primaryStage;
     }
 
-    public void activateScene(Parent parent) {
-        Scene scene = new Scene(parent, width, height);
-        primaryStage.setScene(scene);
+    public void activateScene(String sceneName) {
+        primaryStage.setScene(sceneMap.get(sceneName));
         primaryStage.show();
+    }
+
+    public void addScene(String sceneName, Parent parent) {
+        sceneMap.put(sceneName, new Scene(parent, width, height));
     }
 }

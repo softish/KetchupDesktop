@@ -4,6 +4,9 @@ import exception.NoCachedSessionException;
 import model.api.dtos.AuthenticatedUser;
 
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Created by softish on 2017-10-14.
@@ -29,9 +32,17 @@ public class SessionCacheHandler {
             return (AuthenticatedUser) objectInputStream.readObject();
         } catch (ClassNotFoundException e) {
             throw new NoCachedSessionException();
-
         } catch (IOException e) {
             throw new NoCachedSessionException();
+        }
+    }
+
+    public static void clearCache() {
+        try {
+            Path path = FileSystems.getDefault().getPath(FILE_NAME);
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

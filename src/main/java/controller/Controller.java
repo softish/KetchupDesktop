@@ -35,9 +35,9 @@ public class Controller implements Observer {
         try {
             apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
             enableUIOnAuthentication();
-            SceneManager.getInstance().activateScene(ketchupDesktopView);
+            SceneManager.getInstance().activateScene("ketchup");
         } catch (NoCachedSessionException e) {
-            SceneManager.getInstance().activateScene(signInView);
+            SceneManager.getInstance().activateScene("auth");
         }
     }
 
@@ -78,7 +78,8 @@ public class Controller implements Observer {
                 enableUIOnAuthentication();
                 apiDriver.setAuthenticatedUser(authenticatedUser);
                 SessionCacheHandler.save(authenticatedUser);
-                SceneManager.getInstance().activateScene(ketchupDesktopView);
+                SceneManager.getInstance().activateScene("ketchup");
+
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             } catch (ErroneousCredentialsException e) {
@@ -88,7 +89,6 @@ public class Controller implements Observer {
     }
 
     private void enableUIOnAuthentication() {
-        ketchupDesktopView.disableSignInButton();
         ketchupDesktopView.enableChangeStateButton();
         ketchupDesktopView.enableResetButton();
     }
@@ -105,6 +105,11 @@ public class Controller implements Observer {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }
         });
+    }
+
+    public void signOutHandler() {
+        SceneManager.getInstance().activateScene("auth");
+        SessionCacheHandler.clearCache();
     }
 
     public void addTaskHandler() {
