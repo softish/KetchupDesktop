@@ -89,7 +89,6 @@ public class Controller implements Observer {
 
     private void enableUIOnAuthentication() {
         ketchupDesktopView.disableSignInButton();
-        ketchupDesktopView.disableRegisterButton();
         ketchupDesktopView.enableChangeStateButton();
         ketchupDesktopView.enableResetButton();
     }
