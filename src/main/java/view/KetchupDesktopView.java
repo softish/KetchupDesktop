@@ -22,7 +22,6 @@ public class KetchupDesktopView extends BorderPane {
     private Button resetButton;
     private Button changeStateButton;
     private Button signInButton;
-    private Button registerButton;
     private Label timerLabel;
     private Button setTaskButton;
     private Label selectedTaskLabel;
@@ -37,7 +36,6 @@ public class KetchupDesktopView extends BorderPane {
     private void initView() {
         initGuiComponents();
         composeGuiComponentLayout();
-
         enableDarkTheme();
     }
 
@@ -45,11 +43,7 @@ public class KetchupDesktopView extends BorderPane {
         resetButton = new Button("Reset");
         changeStateButton = new Button("Start");
         signInButton = new Button("Sign in");
-        registerButton = new Button("Register");
-
         timerLabel = new Label("00:00:00");
-        timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold;");
-
         setTaskButton = new Button("Set task");
         currentTaskLabel = new Label("Task: ");
         selectedTaskLabel = new Label(TASK_NOT_SET);
@@ -111,7 +105,6 @@ public class KetchupDesktopView extends BorderPane {
         changeStateButton.setOnAction(event -> controller.changeTimerState());
         resetButton.setOnAction(event -> controller.resetTimer());
         signInButton.setOnAction(event -> controller.loginHandler());
-        registerButton.setOnAction(event -> controller.registerHandler());
         setTaskButton.setOnAction(event -> controller.addTaskHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);

@@ -1,7 +1,9 @@
 package view;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -9,8 +11,8 @@ import javafx.stage.Stage;
  */
 public class SceneManager {
 
-    private static final int width = 360;
-    private static final int height = 640;
+    private double width = 360;
+    private double height = 640;
 
     private Stage primaryStage;
     private static SceneManager sceneManager;
@@ -19,11 +21,13 @@ public class SceneManager {
     }
 
     public static SceneManager getInstance() {
-        if (sceneManager == null) {
-            sceneManager = new SceneManager();
-        }
+        return sceneManager == null ? sceneManager = new SceneManager() : sceneManager;
+    }
 
-        return sceneManager;
+    private void initWindowDimensions() {
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        width = primaryScreenBounds.getHeight() / 3;
+        height = primaryScreenBounds.getWidth() / 3;
     }
 
     public Stage getPrimaryStage() {
