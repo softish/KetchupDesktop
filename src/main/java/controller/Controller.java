@@ -11,6 +11,7 @@ import model.api.dtos.AuthenticatedUser;
 import model.api.dtos.User;
 import view.KetchupDesktopView;
 import view.SceneManager;
+import view.SceneName;
 import view.SignInView;
 
 import java.util.Optional;
@@ -35,9 +36,9 @@ public class Controller implements Observer {
         try {
             apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
             enableUIOnAuthentication();
-            SceneManager.getInstance().activateScene("ketchup");
+            SceneManager.getInstance().activateScene(SceneName.Ketchup);
         } catch (NoCachedSessionException e) {
-            SceneManager.getInstance().activateScene("auth");
+            SceneManager.getInstance().activateScene(SceneName.Auth);
         }
     }
 
@@ -78,7 +79,7 @@ public class Controller implements Observer {
                 enableUIOnAuthentication();
                 apiDriver.setAuthenticatedUser(authenticatedUser);
                 SessionCacheHandler.save(authenticatedUser);
-                SceneManager.getInstance().activateScene("ketchup");
+                SceneManager.getInstance().activateScene(SceneName.Ketchup);
 
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
@@ -108,7 +109,7 @@ public class Controller implements Observer {
     }
 
     public void signOutHandler() {
-        SceneManager.getInstance().activateScene("auth");
+        SceneManager.getInstance().activateScene(SceneName.Auth);
         SessionCacheHandler.clearCache();
     }
 

@@ -17,7 +17,7 @@ public class SceneManager {
     private double width = 360;
     private double height = 640;
 
-    private Map<String, Scene> sceneMap;
+    private Map<SceneName, Scene> sceneMap;
     private Stage primaryStage;
     private static SceneManager sceneManager;
 
@@ -43,12 +43,12 @@ public class SceneManager {
         this.primaryStage = primaryStage;
     }
 
-    public void activateScene(String sceneName) {
+    public void activateScene(SceneName sceneName) {
         primaryStage.setScene(sceneMap.get(sceneName));
         primaryStage.show();
     }
 
-    public void addScene(String sceneName, Parent parent) {
+    public void addScene(SceneName sceneName, Parent parent) {
         sceneMap.put(sceneName, new Scene(parent, width, height));
     }
 }

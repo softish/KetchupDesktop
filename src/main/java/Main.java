@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import model.TimerModel;
 import view.KetchupDesktopView;
 import view.SceneManager;
+import view.SceneName;
 import view.SignInView;
 
 /**
@@ -39,8 +40,8 @@ public class Main extends Application {
         SceneManager.getInstance().setPrimaryStage(primaryStage);
         KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
         SignInView signInView = new SignInView();
-        SceneManager.getInstance().addScene("ketchup", ketchupDesktopView);
-        SceneManager.getInstance().addScene("auth", signInView);
+        SceneManager.getInstance().addScene(SceneName.Ketchup, ketchupDesktopView);
+        SceneManager.getInstance().addScene(SceneName.Auth, signInView);
         TimerModel timerModel = new TimerModel(timeTargetMillis);
         Controller controller = new Controller(ketchupDesktopView, signInView, timerModel);
         ketchupDesktopView.addEventHandlers(controller);
