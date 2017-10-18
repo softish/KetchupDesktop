@@ -182,14 +182,6 @@ public class KetchupDesktopView extends BorderPane {
         signInButton.setDisable(true);
     }
 
-    public void enableRegisterButton() {
-        signInButton.setDisable(false);
-    }
-
-    public void disableRegisterButton() {
-        registerButton.setDisable(true);
-    }
-
     public Optional<String> showAddTaskDialog() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Add task Dialog");
