@@ -184,6 +184,14 @@ public class KetchupDesktopView extends BorderPane {
         resetButton.setDisable(true);
     }
 
+    public void enableSetTaskButton() {
+        setTaskButton.setDisable(false);
+    }
+
+    public void disableSetTaskButton() {
+        setTaskButton.setDisable(true);
+    }
+
     public Optional<String> showAddTaskDialog() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Add task Dialog");

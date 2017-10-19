@@ -47,6 +47,7 @@ public class Controller implements Observer {
             timerModel.stopTimer();
             ketchupDesktopView.setChangeStateButtonText("Start");
             ketchupDesktopView.enableResetButton();
+            ketchupDesktopView.enableSetTaskButton();
         } else {
             if(!ketchupDesktopView.isTaskSet()) {
                 ketchupDesktopView.showErrorDialog("Error", "Task must be set!");
@@ -56,6 +57,7 @@ public class Controller implements Observer {
             timerModel.startTimer();
             ketchupDesktopView.setChangeStateButtonText("Stop");
             ketchupDesktopView.disableResetButton();
+            ketchupDesktopView.disableSetTaskButton();
         }
     }
 
