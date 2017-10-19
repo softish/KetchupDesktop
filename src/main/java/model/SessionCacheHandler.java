@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Created by softish on 2017-10-14.
+ * This class manages the cached sessions.
  */
 public class SessionCacheHandler {
 

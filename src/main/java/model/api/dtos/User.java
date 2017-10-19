@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by softish on 2017-10-05.
+ * This is a Domain Transfer Object of a user.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {

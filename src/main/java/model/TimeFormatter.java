@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by softish on 2017-10-02.
+ * This is a utility class for formatting time.
  */
 public class TimeFormatter {
     public static String getTimeLeftFormatted(TimerModel timerModel) {

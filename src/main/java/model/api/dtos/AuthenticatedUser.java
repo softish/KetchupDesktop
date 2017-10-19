@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 /**
- * Created by softish on 2017-10-06.
+ * This class represents a Domain Transfer Object of a user
+ * that has been authenticated by the API.
  */
 public class AuthenticatedUser implements Serializable {
 

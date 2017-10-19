@@ -1,7 +1,7 @@
 package view;
 
 /**
- * Created by softish on 2017-10-18.
+ * Represents the scenes that are displayed by the SceneManager.
  */
 public enum SceneName {
     Ketchup,

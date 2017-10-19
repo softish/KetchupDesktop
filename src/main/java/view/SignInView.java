@@ -13,7 +13,7 @@ import javafx.util.Pair;
 import java.util.Optional;
 
 /**
- * Created by softish on 2017-10-16.
+ * This class represents the sign in view.
  */
 public class SignInView extends BorderPane {
 
@@ -42,6 +42,11 @@ public class SignInView extends BorderPane {
         return userButtonsPane;
     }
 
+    /**
+     * Binds handler methods to the buttons in the views.
+     *
+     * @param controller the controller where the handlers are defined
+     */
     public void addEventHandlers(Controller controller) {
         signInButton.setOnAction(event -> controller.loginHandler());
         registerButton.setOnAction(event -> controller.registerHandler());

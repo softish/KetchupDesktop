@@ -1,7 +1,8 @@
 package model;
 
 /**
- * Created by softish on 2017-10-04.
+ * Represents the types of events that the
+ * timer can use to notify its observers about changes.
  */
 public enum TimerEvent {
     TICK,

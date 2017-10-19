@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by softish on 2017-10-02.
+ * Enforcing the subject-observer pattern.
  */
 public interface Subject {
     void subscribe(Observer observer);

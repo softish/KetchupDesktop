@@ -12,11 +12,15 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 
 import java.util.Optional;
 
+/**
+ * This class represents the ketchup timer view.
+ */
 public class KetchupDesktopView extends BorderPane {
 
     private Button resetButton;
@@ -116,13 +120,11 @@ public class KetchupDesktopView extends BorderPane {
         setTaskButton.setOnAction(event -> controller.addTaskHandler());
 
         KeyCombination keyCodeCombination = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
-        /*
         this.getScene().addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if (keyCodeCombination.match(event)) {
                 controller.changeTimerState();
             }
         });
-        */
     }
 
     public void setChangeStateButtonText(String text) {

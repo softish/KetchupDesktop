@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by softish on 2017-10-16.
+ * This class manages the views of the application.
  */
 public class SceneManager {
 
@@ -43,11 +43,23 @@ public class SceneManager {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * Sets the currently active scene based on the provided name
+     *
+     * @param sceneName the scene to show
+     */
     public void activateScene(SceneName sceneName) {
         primaryStage.setScene(sceneMap.get(sceneName));
         primaryStage.show();
     }
 
+    /**
+     * Initialization of scenes.
+     * Adds the provided view to the set of displayable scenes.
+     *
+     * @param sceneName the name of the scene to add
+     * @param parent the view that represents the scene
+     */
     public void addScene(SceneName sceneName, Parent parent) {
         sceneMap.put(sceneName, new Scene(parent, width, height));
     }

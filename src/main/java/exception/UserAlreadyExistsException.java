@@ -1,7 +1,8 @@
 package exception;
 
 /**
- * Created by softish on 2017-10-09.
+ * This exception is used to indicate that the provided user name
+ * are already taken.
  */
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException() {

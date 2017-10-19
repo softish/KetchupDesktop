@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by softish on 2017-10-02.
+ * This class models and handles a timer.
+ * The subject-observer pattern is used to
+ * notify observers of changes to the timer.
  */
 public class TimerModel implements Subject {
 
@@ -84,6 +86,9 @@ public class TimerModel implements Subject {
         }
     }
 
+    /**
+     * This class is responsible of managing the flow of time.
+     */
     private class TimerModelTask extends Thread {
 
         private long timeTarget;

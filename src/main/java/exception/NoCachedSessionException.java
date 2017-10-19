@@ -1,7 +1,8 @@
 package exception;
 
 /**
- * Created by softish on 2017-10-14.
+ * This exception is used to indicate that no cached session
+ * is present.
  */
 public class NoCachedSessionException extends RuntimeException {
     public NoCachedSessionException() {

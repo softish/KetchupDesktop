@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
 /**
- * Created by softish on 2017-10-04.
+ * This class is responsible of interacting with the API.
  */
 public class APIDriver {
 

@@ -1,7 +1,7 @@
 package exception;
 
 /**
- * Created by softish on 2017-10-07.
+ * This exception is used to indicate that the server is unreachable.
  */
 public class ServerUnreachableException extends RuntimeException {
     public ServerUnreachableException() {

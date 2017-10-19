@@ -3,7 +3,7 @@ package model.api.dtos;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Created by softish on 2017-10-04.
+ * This class represents a Domain Transfer Object of a session.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimedSession {

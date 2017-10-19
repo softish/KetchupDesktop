@@ -1,7 +1,7 @@
 package exception;
 
 /**
- * Created by softish on 2017-10-09.
+ * This exception indicates that the provided credentials are wrong.
  */
 public class ErroneousCredentialsException extends RuntimeException {
     public ErroneousCredentialsException() {
