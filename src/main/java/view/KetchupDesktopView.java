@@ -193,11 +193,15 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     public Optional<String> showAddTaskDialog() {
-        TextInputDialog dialog = new TextInputDialog();
+        TextInputDialog dialog = new TextInputDialog(getTaskIfSet());
         dialog.setTitle("Add task Dialog");
         dialog.setHeaderText(null);
         dialog.setContentText("Enter task:");
 
         return dialog.showAndWait();
+    }
+
+    private String getTaskIfSet() {
+        return selectedTaskLabel.getText().equals(TASK_NOT_SET) ? "" : selectedTaskLabel.getText();
     }
 }

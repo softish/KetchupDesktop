@@ -129,6 +129,7 @@ public class Controller implements Observer {
             ketchupDesktopView.displayTimeOut();
             ketchupDesktopView.disableChangeStateButton();
             ketchupDesktopView.enableResetButton();
+            ketchupDesktopView.enableSetTaskButton();
 
             try{
                 apiDriver.saveSession(timerModel.getSessionDurationMillis(), ketchupDesktopView.getTask());
