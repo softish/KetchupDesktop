@@ -10,22 +10,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
-    private String userName;
+    private String username;
     private String password;
 
     @JsonCreator
     public User(@JsonProperty("username") String username,
                 @JsonProperty("password") String password) {
-        this.userName = username;
+        this.username = username;
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

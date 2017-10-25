@@ -11,16 +11,18 @@ public class TimedSession {
     private long userId;
     private long duration;
     private String task;
+    private String endDateTime;
 
     public TimedSession(long userId, long duration) {
         this.userId = userId;
         this.duration = duration;
     }
 
-    public TimedSession(long userId, long duration, String task) {
+    public TimedSession(long userId, long duration, String task, String endDateTime) {
         this.userId = userId;
         this.duration = duration;
         this.task = task;
+        this.endDateTime = endDateTime;
     }
 
     public long getUserId() {
@@ -45,5 +47,13 @@ public class TimedSession {
 
     public void setTask(String task) {
         this.task = task;
+    }
+
+    public String getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(String endDateTime) {
+        this.endDateTime = endDateTime;
     }
 }

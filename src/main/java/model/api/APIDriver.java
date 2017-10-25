@@ -14,6 +14,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * This class is responsible of interacting with the API.
@@ -24,9 +26,11 @@ public class APIDriver {
     private AuthenticatedUser authenticatedUser;
 
     private static final String BASE_URL = "http://localhost:8080";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssX";
 
     public void saveSession(long userId, long sessionDuration, String task) {
-        TimedSession timedSession = new TimedSession(userId, sessionDuration, task);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
+        TimedSession timedSession = new TimedSession(userId, sessionDuration, task, simpleDateFormat.format(new Date()));
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<TimedSession> request = new HttpEntity<>(timedSession);
 
@@ -39,7 +43,7 @@ public class APIDriver {
 
     public void saveSession(int duration, String task) {
         if(authenticatedUser == null) {
-            authenticatedUser = authenticate(this.user.getUserName(), this.user.getPassword());
+            authenticatedUser = authenticate(this.user.getUsername(), this.user.getPassword());
         }
         saveSession(authenticatedUser.getId(), duration, task);
     }
