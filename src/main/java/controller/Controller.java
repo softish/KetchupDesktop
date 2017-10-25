@@ -113,6 +113,8 @@ public class Controller implements Observer {
     public void signOutHandler() {
         SceneManager.getInstance().activateScene(SceneName.Auth);
         SessionCacheHandler.clearCache();
+        resetTimer();
+        ketchupDesktopView.resetTaskLabel();
     }
 
     public void addTaskHandler() {
