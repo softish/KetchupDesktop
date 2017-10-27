@@ -204,4 +204,8 @@ public class KetchupDesktopView extends BorderPane {
     private String getTaskIfSet() {
         return selectedTaskLabel.getText().equals(TASK_NOT_SET) ? "" : selectedTaskLabel.getText();
     }
+
+    public void resetTaskLabel() {
+        selectedTaskLabel.setText(TASK_NOT_SET);
+    }
 }
