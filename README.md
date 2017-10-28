@@ -11,6 +11,9 @@ Make sure to meet the [Dependencies](./README.md#dependencies).
 ## Getting started - development
 Import gradle project to favorite IDE.
 
+Alternatively a text editor and gradle can be used.
+The application can be started via gradle using the gradle task `run` or `bootRun`.
+
 ### Packaging
 Run gradle task `jfxJar` for minimal *jar* with external dependencies.
 
