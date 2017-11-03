@@ -35,6 +35,7 @@ public class Controller implements Observer {
 
         try {
             apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
+            ketchupDesktopView.setCurrentUser(apiDriver.getAuthenticatedUser().getUserName());
             enableUIOnAuthentication();
             SceneManager.getInstance().activateScene(SceneName.Ketchup);
         } catch (NoCachedSessionException e) {
@@ -80,9 +81,9 @@ public class Controller implements Observer {
                 AuthenticatedUser authenticatedUser = apiDriver.authenticate(usernamePassword.getKey(), usernamePassword.getValue());
                 enableUIOnAuthentication();
                 apiDriver.setAuthenticatedUser(authenticatedUser);
+                ketchupDesktopView.setCurrentUser(authenticatedUser.getUserName());
                 SessionCacheHandler.save(authenticatedUser);
                 SceneManager.getInstance().activateScene(SceneName.Ketchup);
-
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             } catch (ErroneousCredentialsException e) {

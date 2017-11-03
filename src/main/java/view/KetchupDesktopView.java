@@ -30,6 +30,8 @@ public class KetchupDesktopView extends BorderPane {
     private Button setTaskButton;
     private Label selectedTaskLabel;
     private Label currentTaskLabel;
+    private Label currentUserLabel;
+    private Label signedInUserLabel;
 
     private static final String TASK_NOT_SET = "[not set]";
 
@@ -52,6 +54,8 @@ public class KetchupDesktopView extends BorderPane {
         currentTaskLabel = new Label("Task: ");
         selectedTaskLabel = new Label(TASK_NOT_SET);
         selectedTaskLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        currentUserLabel = new Label("");
+        signedInUserLabel = new Label("Signed in as:");
     }
 
     private FlowPane getTimerButtonsPane() {
@@ -67,6 +71,9 @@ public class KetchupDesktopView extends BorderPane {
     private FlowPane getSignOutButtonPane() {
         FlowPane signOutButtonPane = new FlowPane();
         signOutButtonPane.setPadding(new Insets(25, 25, 25, 25));
+        signOutButtonPane.setHgap(10);
+        signOutButtonPane.getChildren().add(signedInUserLabel);
+        signOutButtonPane.getChildren().add(currentUserLabel);
         signOutButtonPane.getChildren().add(signOutButton);
         return signOutButtonPane;
     }
@@ -207,5 +214,9 @@ public class KetchupDesktopView extends BorderPane {
 
     public void resetTaskLabel() {
         selectedTaskLabel.setText(TASK_NOT_SET);
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUserLabel.setText(currentUser);
     }
 }
