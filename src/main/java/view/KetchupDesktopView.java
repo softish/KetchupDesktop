@@ -55,7 +55,7 @@ public class KetchupDesktopView extends BorderPane {
         selectedTaskLabel = new Label(TASK_NOT_SET);
         selectedTaskLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         currentUserLabel = new Label("");
-        signedInUserLabel = new Label("Signed in as:");
+        signedInUserLabel = new Label("User:");
     }
 
     private FlowPane getTimerButtonsPane() {
