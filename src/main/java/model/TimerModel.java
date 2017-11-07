@@ -65,6 +65,10 @@ public class TimerModel implements Subject {
         return Math.toIntExact(timeTargetMillis - timeLeft / 60000);
     }
 
+    public boolean isReset() {
+        return timeLeft - timeTargetMillis == 0;
+    }
+
     @Override
     public void subscribe(Observer observer) {
         if(!observers.contains(observer)) {

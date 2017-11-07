@@ -41,6 +41,10 @@ public class Controller implements Observer {
         } catch (NoCachedSessionException e) {
             SceneManager.getInstance().activateScene(SceneName.Auth);
         }
+
+        if(timerModel.isReset()) {
+            ketchupDesktopView.disableResetButton();
+        }
     }
 
     public void changeTimerState() {
@@ -64,6 +68,7 @@ public class Controller implements Observer {
 
     public void resetTimer() {
         timerModel.resetTimer();
+        ketchupDesktopView.disableResetButton();
     }
 
     public void exitApplication() {
