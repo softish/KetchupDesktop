@@ -30,8 +30,6 @@ public class Controller implements Observer {
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
         timerModel.subscribe(this);
         apiDriver = new APIDriver();
-        ketchupDesktopView.disableChangeStateButton();
-        ketchupDesktopView.disableResetButton();
 
         try {
             apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
@@ -42,9 +40,7 @@ public class Controller implements Observer {
             SceneManager.getInstance().activateScene(SceneName.Auth);
         }
 
-        if(timerModel.isReset()) {
-            ketchupDesktopView.disableResetButton();
-        }
+        this.ketchupDesktopView.disableResetButton();
     }
 
     public void changeTimerState() {
@@ -87,6 +83,7 @@ public class Controller implements Observer {
                 enableUIOnAuthentication();
                 apiDriver.setAuthenticatedUser(authenticatedUser);
                 ketchupDesktopView.setCurrentUser(authenticatedUser.getUserName());
+                ketchupDesktopView.disableResetButton();
                 SessionCacheHandler.save(authenticatedUser);
                 SceneManager.getInstance().activateScene(SceneName.Ketchup);
             } catch (ServerUnreachableException e) {
