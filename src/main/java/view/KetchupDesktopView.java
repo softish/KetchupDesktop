@@ -143,11 +143,23 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     public void displayTimeOut() {
-        Platform.runLater(() -> showAlert("Time out Dialog", "Time out!"));
+        Platform.runLater(() -> {
+            Optional<String> tag = showTimeOutDialog();
+            tag.ifPresent(theTag -> updateTask(theTag));
+        });
     }
 
     public void showErrorDialog(String title, String message) {
         Platform.runLater(() -> showAlert(title, message));
+    }
+
+    public Optional<String> showTimeOutDialog() {
+        TextInputDialog dialog = new TextInputDialog(getTaskIfSet());
+        dialog.setTitle("Time out");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Time out! Task:");
+
+        return dialog.showAndWait();
     }
 
     private void showAlert(String title, String message) {
