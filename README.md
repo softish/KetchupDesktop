@@ -14,6 +14,12 @@ Import gradle project to favorite IDE.
 Alternatively a text editor and gradle can be used.
 The application can be started via gradle using the gradle task `run` or `bootRun`.
 
+### Program arguments
+The following program arguments are relevant during development:
+
+    [an integer] - timer target (ms)
+    dev - uses url localhost and port 8080
+
 ### Packaging
 Run gradle task `jfxJar` for minimal *jar* with external dependencies.
 

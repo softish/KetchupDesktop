@@ -13,19 +13,32 @@ import view.SignInView;
 public class Main extends Application {
 
     private static int timeTargetMillis = 20 * 60 * 1000;
+    private static boolean devMode;
 
     public static void main(String[] args) {
-        setTargetViaArg(args);
+        parseArgs(args);
         launch(args);
     }
 
-    private static void setTargetViaArg(String[] args) {
-        if(args.length == 1) {
-            try {
-                timeTargetMillis = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                System.err.println("Argument must be an integer value");
+    private static void parseArgs(String[] args) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equalsIgnoreCase("dev")) {
+                enableDevelopmentMode();
+            } else {
+                setTarget(args[i]);
             }
+        }
+    }
+
+    private static void enableDevelopmentMode() {
+        devMode = true;
+    }
+
+    private static void setTarget(String arg) {
+        try {
+            timeTargetMillis = Integer.parseInt(arg);
+        } catch (NumberFormatException e) {
+            System.err.println("Argument must be an integer value");
         }
     }
 
@@ -42,7 +55,7 @@ public class Main extends Application {
         SceneManager.getInstance().addScene(SceneName.Ketchup, ketchupDesktopView);
         SceneManager.getInstance().addScene(SceneName.Auth, signInView);
         TimerModel timerModel = new TimerModel(timeTargetMillis);
-        Controller controller = new Controller(ketchupDesktopView, signInView, timerModel);
+        Controller controller = new Controller(ketchupDesktopView, signInView, timerModel, devMode);
         ketchupDesktopView.addEventHandlers(controller);
         signInView.addEventHandlers(controller);
 

@@ -22,11 +22,19 @@ import java.util.Date;
  */
 public class APIDriver {
 
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssX";
+
     private User user;
     private AuthenticatedUser authenticatedUser;
+    private String BASE_URL;
 
-    private static final String BASE_URL = "http://localhost:8080";
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssX";
+    public APIDriver(boolean developmentMode) {
+        if(developmentMode) {
+            BASE_URL = "http://localhost:8080";
+        } else {
+            BASE_URL = "http://ketchup.zapto.org:5757";
+        }
+    }
 
     public void saveSession(long userId, long sessionDuration, String task) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);

@@ -23,13 +23,13 @@ public class Controller implements Observer {
     private TimerModel timerModel;
     private APIDriver apiDriver;
 
-    public Controller(KetchupDesktopView ketchupDesktopView, SignInView signInView, TimerModel timerModel) {
+    public Controller(KetchupDesktopView ketchupDesktopView, SignInView signInView, TimerModel timerModel, boolean devMode) {
         this.ketchupDesktopView = ketchupDesktopView;
         this.signInView = signInView;
         this.timerModel = timerModel;
         this.ketchupDesktopView.setTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
         timerModel.subscribe(this);
-        apiDriver = new APIDriver();
+        apiDriver = new APIDriver(devMode);
 
         try {
             apiDriver.setAuthenticatedUser(SessionCacheHandler.load());
@@ -50,7 +50,7 @@ public class Controller implements Observer {
             ketchupDesktopView.enableResetButton();
             ketchupDesktopView.enableSetTaskButton();
         } else {
-            if(!ketchupDesktopView.isTaskSet()) {
+            if (!ketchupDesktopView.isTaskSet()) {
                 ketchupDesktopView.showErrorDialog("Error", "Task must be set!");
                 return;
             }
@@ -129,20 +129,18 @@ public class Controller implements Observer {
     public void update(TimerEvent timerEvent) {
         if (timerEvent.equals(TimerEvent.TICK)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
-        }
-        if (timerEvent.equals(TimerEvent.TIME_OUT)) {
+        } else if (timerEvent.equals(TimerEvent.TIME_OUT)) {
             ketchupDesktopView.displayTimeOut();
             ketchupDesktopView.disableChangeStateButton();
             ketchupDesktopView.enableResetButton();
             ketchupDesktopView.enableSetTaskButton();
 
-            try{
+            try {
                 apiDriver.saveSession(timerModel.getSessionDurationMillis(), ketchupDesktopView.getTask());
             } catch (ServerUnreachableException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }
-        }
-        if (timerEvent.equals(TimerEvent.RESET)) {
+        } else if (timerEvent.equals(TimerEvent.RESET)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
             ketchupDesktopView.enableChangeStateButton();
             if (!timerModel.isTimerActive()) {
