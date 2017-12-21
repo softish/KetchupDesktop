@@ -157,7 +157,7 @@ public class KetchupDesktopView extends BorderPane {
         TextInputDialog dialog = new TextInputDialog(getTaskIfSet());
         dialog.setTitle("Time out");
         dialog.setHeaderText(null);
-        dialog.setContentText("Time out! Task:");
+        dialog.setContentText("Time out! Next session task:");
 
         return dialog.showAndWait();
     }
