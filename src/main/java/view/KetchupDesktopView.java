@@ -111,7 +111,7 @@ public class KetchupDesktopView extends BorderPane {
         this.setBottom(getTimerButtonsPane());
     }
 
-    public void enableDarkTheme() {
+    private void enableDarkTheme() {
         this.setStyle("-fx-background: #1E1E1E;");
         timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-fill: #DCDCDC;");
     }
@@ -145,7 +145,7 @@ public class KetchupDesktopView extends BorderPane {
     public void displayTimeOut() {
         Platform.runLater(() -> {
             Optional<String> tag = showTimeOutDialog();
-            tag.ifPresent(theTag -> updateTask(theTag));
+            tag.ifPresent(this::updateTask);
         });
     }
 
@@ -153,7 +153,7 @@ public class KetchupDesktopView extends BorderPane {
         Platform.runLater(() -> showAlert(title, message));
     }
 
-    public Optional<String> showTimeOutDialog() {
+    private Optional<String> showTimeOutDialog() {
         TextInputDialog dialog = new TextInputDialog(getTaskIfSet());
         dialog.setTitle("Time out");
         dialog.setHeaderText(null);
@@ -175,7 +175,7 @@ public class KetchupDesktopView extends BorderPane {
         Platform.runLater(() -> setTask(task));
     }
 
-    public void setTask(String task) {
+    private void setTask(String task) {
         selectedTaskLabel.setText(task);
     }
 
