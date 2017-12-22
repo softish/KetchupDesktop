@@ -21,11 +21,11 @@ public class Main extends Application {
     }
 
     private static void parseArgs(String[] args) {
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equalsIgnoreCase("dev")) {
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("dev")) {
                 enableDevelopmentMode();
             } else {
-                setTarget(args[i]);
+                setTarget(arg);
             }
         }
     }
@@ -48,7 +48,7 @@ public class Main extends Application {
      * @param primaryStage arguments supplied to the application by JavaFX
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         SceneManager.getInstance().setPrimaryStage(primaryStage);
         KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
         SignInView signInView = new SignInView();

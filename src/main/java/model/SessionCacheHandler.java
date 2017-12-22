@@ -30,9 +30,7 @@ public class SessionCacheHandler {
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
 
             return (AuthenticatedUser) objectInputStream.readObject();
-        } catch (ClassNotFoundException e) {
-            throw new NoCachedSessionException();
-        } catch (IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             throw new NoCachedSessionException();
         }
     }

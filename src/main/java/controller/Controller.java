@@ -86,9 +86,7 @@ public class Controller implements Observer {
                 ketchupDesktopView.disableResetButton();
                 SessionCacheHandler.save(authenticatedUser);
                 SceneManager.getInstance().activateScene(SceneName.Ketchup);
-            } catch (ServerUnreachableException e) {
-                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
-            } catch (ErroneousCredentialsException e) {
+            } catch (ServerUnreachableException | ErroneousCredentialsException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }
         });
@@ -105,9 +103,7 @@ public class Controller implements Observer {
         result.ifPresent(usernamePassword -> {
             try {
                 apiDriver.register(usernamePassword.getKey(), usernamePassword.getValue());
-            } catch (ServerUnreachableException e) {
-                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
-            } catch (UserAlreadyExistsException e) {
+            } catch (ServerUnreachableException | UserAlreadyExistsException e) {
                 ketchupDesktopView.showErrorDialog("Error", e.getMessage());
             }
         });

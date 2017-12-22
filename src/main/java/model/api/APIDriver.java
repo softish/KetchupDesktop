@@ -26,7 +26,7 @@ public class APIDriver {
 
     private User user;
     private AuthenticatedUser authenticatedUser;
-    private String BASE_URL;
+    private final String BASE_URL;
 
     public APIDriver(boolean developmentMode) {
         if(developmentMode) {
@@ -71,7 +71,7 @@ public class APIDriver {
             }
 
             @Override
-            public void handleError(ClientHttpResponse response) throws IOException {
+            public void handleError(ClientHttpResponse response) {
 
             }
         });
@@ -99,7 +99,7 @@ public class APIDriver {
             }
 
             @Override
-            public void handleError(ClientHttpResponse response) throws IOException {
+            public void handleError(ClientHttpResponse response) {
 
             }
         });
