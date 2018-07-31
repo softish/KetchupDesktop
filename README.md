@@ -4,6 +4,8 @@ A pomodoro timer that generates session statistics using the
 The statistics are available at the
 [KetchupDashboard](https://github.com/softish/KetchupDashboard).
 
+![banner](https://uae32w.db.files.1drv.com/y4mDm6fShz2FVZbTj_z2y_tberb_qzSmfzTzJkjBHNUphAaw3uC181aQLQ12V6N0HaV3zr1C5_sG7a7_R4DV9z1OftKi0R64VCdeSrmExa5hb6jtbJWW9dFQaeM8Oy45QELQMFkOg94fbfWPAyrP_faOgFQfgEZgMsmTmwVR85Qi16RsA0erAbMexl_ua0rjyshyjbVb6L-KvCnx4IpU6Dvvw?width=1024&height=444&cropmode=none)
+
 ## Getting started
 Download and run a packaged version from the [Releases](https://github.com/softish/KetchupDesktop/releases). 
 Make sure to meet the [Dependencies](./README.md#dependencies).
