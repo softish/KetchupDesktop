@@ -44,7 +44,6 @@ task fatJar(type: Jar) {
         attributes 'Main-Class': 'Main'
     }
 
-    baseName = project.name
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
