@@ -69,6 +69,7 @@ public class Controller implements Observer {
 
     public void exitApplication() {
         timerModel.stopTimer();
+        timerModel.unSubscribe(this);
     }
 
     public void loginHandler() {
