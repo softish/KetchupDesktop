@@ -58,7 +58,7 @@ public class SceneManager {
      * Adds the provided view to the set of displayable scenes.
      *
      * @param sceneName the name of the scene to add
-     * @param parent the view that represents the scene
+     * @param parent    the view that represents the scene
      */
     public void addScene(SceneName sceneName, Parent parent) {
         sceneMap.put(sceneName, new Scene(parent, width, height));

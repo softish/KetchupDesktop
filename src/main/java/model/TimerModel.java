@@ -29,7 +29,7 @@ public class TimerModel implements Subject {
     }
 
     public void startTimer() {
-        if(!timerModelTask.isAlive()) {
+        if (!timerModelTask.isAlive()) {
             timerModelTask = new TimerModelTask(timeLeft, this);
             timerModelTask.start();
         }
@@ -71,21 +71,21 @@ public class TimerModel implements Subject {
 
     @Override
     public void subscribe(Observer observer) {
-        if(!observers.contains(observer)) {
+        if (!observers.contains(observer)) {
             observers.add(observer);
         }
     }
 
     @Override
     public void unSubscribe(Observer observer) {
-        if(observers.contains(observer)) {
+        if (observers.contains(observer)) {
             observers.remove(observers.indexOf(observer));
         }
     }
 
     @Override
     public void notifyObservers(TimerEvent timerEvent) {
-        for(Observer observer : observers) {
+        for (Observer observer : observers) {
             observer.update(timerEvent);
         }
     }
@@ -108,7 +108,7 @@ public class TimerModel implements Subject {
         public void run() {
             while (timeTarget > 0) {
                 try {
-                    if(end) {
+                    if (end) {
                         break;
                     }
 
@@ -120,7 +120,7 @@ public class TimerModel implements Subject {
                 }
             }
 
-            if(timeTarget == 0) {
+            if (timeTarget == 0) {
                 timerModel.timeout();
             }
         }

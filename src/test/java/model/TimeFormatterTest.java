@@ -2,7 +2,7 @@ package model;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by softish on 2017-10-02.

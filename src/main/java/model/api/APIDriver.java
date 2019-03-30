@@ -29,7 +29,7 @@ public class APIDriver {
     private final String BASE_URL;
 
     public APIDriver(boolean developmentMode) {
-        if(developmentMode) {
+        if (developmentMode) {
             BASE_URL = "http://localhost:8080";
         } else {
             BASE_URL = "http://ketchup.zapto.org:5757";
@@ -50,7 +50,7 @@ public class APIDriver {
     }
 
     public void saveSession(int duration, String task) {
-        if(authenticatedUser == null) {
+        if (authenticatedUser == null) {
             authenticatedUser = authenticate(this.user.getUsername(), this.user.getPassword());
         }
         saveSession(authenticatedUser.getId(), duration, task);
