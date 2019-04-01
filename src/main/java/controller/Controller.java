@@ -18,6 +18,9 @@ import java.util.Optional;
 
 public class Controller implements Observer {
 
+    private static final String ERROR = "Error";
+
+
     private KetchupDesktopView ketchupDesktopView;
     private SignInView signInView;
     private TimerModel timerModel;
@@ -51,7 +54,7 @@ public class Controller implements Observer {
             ketchupDesktopView.enableSetTaskButton();
         } else {
             if (!ketchupDesktopView.isTaskSet()) {
-                ketchupDesktopView.showErrorDialog("Error", "Task must be set!");
+                ketchupDesktopView.showErrorDialog(ERROR, "Task must be set!");
                 return;
             }
 
@@ -88,7 +91,7 @@ public class Controller implements Observer {
                 SessionCacheHandler.save(authenticatedUser);
                 SceneManager.getInstance().activateScene(SceneName.Ketchup);
             } catch (ServerUnreachableException | ErroneousCredentialsException e) {
-                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+                ketchupDesktopView.showErrorDialog(ERROR, e.getMessage());
             }
         });
     }
@@ -105,7 +108,7 @@ public class Controller implements Observer {
             try {
                 apiDriver.register(usernamePassword.getKey(), usernamePassword.getValue());
             } catch (ServerUnreachableException | UserAlreadyExistsException e) {
-                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+                ketchupDesktopView.showErrorDialog(ERROR, e.getMessage());
             }
         });
     }
@@ -135,7 +138,7 @@ public class Controller implements Observer {
             try {
                 apiDriver.saveSession(timerModel.getSessionDurationMillis(), ketchupDesktopView.getTask());
             } catch (ServerUnreachableException e) {
-                ketchupDesktopView.showErrorDialog("Error", e.getMessage());
+                ketchupDesktopView.showErrorDialog(ERROR, e.getMessage());
             }
         } else if (timerEvent.equals(TimerEvent.RESET)) {
             ketchupDesktopView.updateTimeLabel(TimeFormatter.getTimeLeftFormatted(timerModel));
