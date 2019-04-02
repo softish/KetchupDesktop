@@ -56,6 +56,7 @@ public class SignInView extends BorderPane {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Sign In Dialog");
         dialog.setHeaderText(null);
+        dialog.getDialogPane().setStyle("-fx-background: #1E1E1E; -fx-fill: #DCDCDC;");
 
         ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
@@ -99,6 +100,7 @@ public class SignInView extends BorderPane {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Register Dialog");
         dialog.setHeaderText(null);
+        dialog.getDialogPane().setStyle("-fx-background: #1E1E1E; -fx-fill: #DCDCDC;");
 
         ButtonType registerButtonType = new ButtonType("Register", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(registerButtonType, ButtonType.CANCEL);
