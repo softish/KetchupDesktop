@@ -122,11 +122,11 @@ public class SignInView extends BorderPane {
 
         dialog.getDialogPane().setContent(grid);
 
-        Node registerButton = dialog.getDialogPane().lookupButton(registerButtonType);
-        registerButton.setDisable(true);
+        Node registerButtonForDialog = dialog.getDialogPane().lookupButton(registerButtonType);
+        registerButtonForDialog.setDisable(true);
 
-        username.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
-        password.textProperty().addListener((observable, oldValue, newValue) -> registerButton.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
+        username.textProperty().addListener((observable, oldValue, newValue) -> registerButtonForDialog.setDisable(newValue.trim().isEmpty() || password.getText().trim().isEmpty()));
+        password.textProperty().addListener((observable, oldValue, newValue) -> registerButtonForDialog.setDisable(newValue.trim().isEmpty() || username.getText().trim().isEmpty()));
         username.requestFocus();
 
         dialog.setResultConverter(dialogButton -> {
