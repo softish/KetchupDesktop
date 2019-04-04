@@ -52,8 +52,8 @@ public class Main extends Application {
         SceneManager.getInstance().setPrimaryStage(primaryStage);
         KetchupDesktopView ketchupDesktopView = new KetchupDesktopView();
         SignInView signInView = new SignInView();
-        SceneManager.getInstance().addScene(SceneName.Ketchup, ketchupDesktopView);
-        SceneManager.getInstance().addScene(SceneName.Auth, signInView);
+        SceneManager.getInstance().addScene(SceneName.KETCHUP, ketchupDesktopView);
+        SceneManager.getInstance().addScene(SceneName.AUTH, signInView);
         TimerModel timerModel = new TimerModel(timeTargetMillis);
         Controller controller = new Controller(ketchupDesktopView, signInView, timerModel, devMode);
         ketchupDesktopView.addEventHandlers(controller);
