@@ -4,6 +4,11 @@ package model;
  * This is a utility class for formatting time.
  */
 public class TimeFormatter {
+
+    private TimeFormatter() {
+
+    }
+
     public static String getTimeLeftFormatted(TimerModel timerModel) {
         long timeLeft = timerModel.getTimeLeft();
         long hour = (timeLeft / (60 * 60 * 1000)) % 24;

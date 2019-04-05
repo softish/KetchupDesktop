@@ -15,6 +15,10 @@ public class SessionCacheHandler {
 
     private static final String FILE_NAME = "data.ser";
 
+    private SessionCacheHandler() {
+
+    }
+
     public static void save(AuthenticatedUser authenticatedUser) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(new File(FILE_NAME));
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
