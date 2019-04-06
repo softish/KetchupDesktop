@@ -122,7 +122,7 @@ public class Controller implements Observer {
 
     public void addTaskHandler() {
         Optional<String> tag = ketchupDesktopView.showAddTaskDialog();
-        tag.ifPresent(theTag -> ketchupDesktopView.updateTask(theTag));
+        tag.ifPresent(ketchupDesktopView::updateTask);
     }
 
     @Override
