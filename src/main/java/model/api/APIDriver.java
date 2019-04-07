@@ -26,13 +26,13 @@ public class APIDriver {
 
     private User user;
     private AuthenticatedUser authenticatedUser;
-    private final String BASE_URL;
+    private final String baseUrl;
 
     public APIDriver(boolean developmentMode) {
         if (developmentMode) {
-            BASE_URL = "http://localhost:8080";
+            baseUrl = "http://localhost:8080";
         } else {
-            BASE_URL = "http://ketchup.zapto.org:5757";
+            baseUrl = "http://ketchup.zapto.org:5757";
         }
     }
 
@@ -43,7 +43,7 @@ public class APIDriver {
         HttpEntity<TimedSession> request = new HttpEntity<>(timedSession);
 
         try {
-            restTemplate.postForObject(BASE_URL + "/session/save", request, TimedSession.class);
+            restTemplate.postForObject(baseUrl + "/session/save", request, TimedSession.class);
         } catch (RestClientException e) {
             throw new ServerUnreachableException("Server unreachable");
         }
@@ -77,7 +77,7 @@ public class APIDriver {
         });
 
         try {
-            restTemplate.postForObject(BASE_URL + "/user/register", request, User.class);
+            restTemplate.postForObject(baseUrl + "/user/register", request, User.class);
         } catch (RestClientException e) {
             throw new ServerUnreachableException("Server unreachable");
         }
@@ -105,7 +105,7 @@ public class APIDriver {
         });
 
         try {
-            authenticatedUser = restTemplate.postForObject(BASE_URL + "/user/authenticate", request, AuthenticatedUser.class);
+            authenticatedUser = restTemplate.postForObject(baseUrl + "/user/authenticate", request, AuthenticatedUser.class);
         } catch (RestClientException e) {
             throw new ServerUnreachableException("Server unreachable");
         }
