@@ -17,7 +17,7 @@ public class SceneManager {
     private double width = 360;
     private double height = 640;
 
-    private Map<SceneName, Scene> sceneMap;
+    private final Map<SceneName, Scene> sceneMap;
     private Stage primaryStage;
     private static SceneManager sceneManager;
 

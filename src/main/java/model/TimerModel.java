@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class TimerModel implements Subject {
 
-    private long timeTargetMillis;
+    private final long timeTargetMillis;
     private long timeLeft;
     private TimerModelTask timerModelTask;
 
-    private List<Observer> observers;
+    private final List<Observer> observers;
 
     /**
      * Constructs a timer with time out at the provided timeTargetMillis.
@@ -96,7 +96,7 @@ public class TimerModel implements Subject {
     private class TimerModelTask extends Thread {
 
         private long timeTarget;
-        private TimerModel timerModel;
+        private final TimerModel timerModel;
         private boolean end;
 
         public TimerModelTask(long timeTarget, TimerModel timerModel) {

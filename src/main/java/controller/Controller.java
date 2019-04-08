@@ -20,11 +20,10 @@ public class Controller implements Observer {
 
     private static final String ERROR = "Error";
 
-
-    private KetchupDesktopView ketchupDesktopView;
-    private SignInView signInView;
-    private TimerModel timerModel;
-    private APIDriver apiDriver;
+    private final KetchupDesktopView ketchupDesktopView;
+    private final SignInView signInView;
+    private final TimerModel timerModel;
+    private final APIDriver apiDriver;
 
     public Controller(KetchupDesktopView ketchupDesktopView, SignInView signInView, TimerModel timerModel, boolean devMode) {
         this.ketchupDesktopView = ketchupDesktopView;
