@@ -19,6 +19,7 @@ public class TimeFormatter {
     }
 
     private static String addLeadingOs(long value) {
-        return value == 0 ? "00" : (value < 10) ? "0" + value : value + "";
+        String paddedValue = (value < 10) ? "0" + value : value + "";
+        return value == 0 ? "00" : paddedValue;
     }
 }
