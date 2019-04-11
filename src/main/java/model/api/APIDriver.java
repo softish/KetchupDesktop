@@ -24,6 +24,8 @@ public class APIDriver {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssX";
 
+    private final String baseUrl;
+
     private User user;
     private AuthenticatedUser authenticatedUser;
     private final String baseUrl;
