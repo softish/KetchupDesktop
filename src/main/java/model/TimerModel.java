@@ -74,9 +74,7 @@ public class TimerModel implements Subject {
 
     @Override
     public void unSubscribe(Observer observer) {
-        if (observers.contains(observer)) {
-            observers.remove(observer);
-        }
+        observers.remove(observer);
     }
 
     @Override
