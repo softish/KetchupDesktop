@@ -23,6 +23,7 @@ import java.util.Date;
 public class APIDriver {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ssX";
+    private static final String SERVER_UNREACHABLE = "Server unreachable";
 
     private final String baseUrl;
 
@@ -47,7 +48,7 @@ public class APIDriver {
         try {
             restTemplate.postForObject(baseUrl + "/session/save", request, TimedSession.class);
         } catch (RestClientException e) {
-            throw new ServerUnreachableException("Server unreachable");
+            throw new ServerUnreachableException(SERVER_UNREACHABLE);
         }
     }
 
@@ -81,7 +82,7 @@ public class APIDriver {
         try {
             restTemplate.postForObject(baseUrl + "/user/register", request, User.class);
         } catch (RestClientException e) {
-            throw new ServerUnreachableException("Server unreachable");
+            throw new ServerUnreachableException(SERVER_UNREACHABLE);
         }
     }
 
@@ -109,7 +110,7 @@ public class APIDriver {
         try {
             authenticatedUser = restTemplate.postForObject(baseUrl + "/user/authenticate", request, AuthenticatedUser.class);
         } catch (RestClientException e) {
-            throw new ServerUnreachableException("Server unreachable");
+            throw new ServerUnreachableException(SERVER_UNREACHABLE);
         }
 
         return authenticatedUser;
