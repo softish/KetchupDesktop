@@ -26,7 +26,10 @@ public class SceneManager {
     }
 
     public static SceneManager getInstance() {
-        return sceneManager == null ? sceneManager = new SceneManager() : sceneManager;
+        if(sceneManager == null) {
+            sceneManager = new SceneManager();
+        }
+        return sceneManager;
     }
 
     private void initWindowDimensions() {
