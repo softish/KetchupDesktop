@@ -29,7 +29,6 @@ public class APIDriver {
 
     private User user;
     private AuthenticatedUser authenticatedUser;
-    private final String baseUrl;
 
     public APIDriver(boolean developmentMode) {
         if (developmentMode) {
