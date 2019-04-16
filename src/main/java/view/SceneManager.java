@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
 /**
  * This class manages the views of the application.
@@ -17,16 +16,16 @@ public class SceneManager {
     private double width = 360;
     private double height = 640;
 
-    private final Map<SceneName, Scene> sceneMap;
+    private final EnumMap<SceneName, Scene> sceneMap;
     private Stage primaryStage;
     private static SceneManager sceneManager;
 
     private SceneManager() {
-        sceneMap = new HashMap<>();
+        sceneMap = new EnumMap<>(SceneName.class);
     }
 
     public static SceneManager getInstance() {
-        if(sceneManager == null) {
+        if (sceneManager == null) {
             sceneManager = new SceneManager();
         }
         return sceneManager;
