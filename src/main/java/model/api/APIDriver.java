@@ -74,7 +74,7 @@ public class APIDriver {
 
             @Override
             public void handleError(ClientHttpResponse response) {
-
+                // only called when the hasError of the same interface returns true
             }
         });
 
@@ -102,7 +102,7 @@ public class APIDriver {
 
             @Override
             public void handleError(ClientHttpResponse response) {
-
+                // only called when the hasError of the same interface returns true
             }
         });
 
