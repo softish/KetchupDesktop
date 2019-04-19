@@ -1,9 +1,7 @@
 package view;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.EnumMap;
@@ -14,8 +12,8 @@ import java.util.Map;
  */
 public class SceneManager {
 
-    private double width = 360;
-    private double height = 640;
+    private static final double width = 360;
+    private static final double height = 640;
 
     private final Map<SceneName, Scene> sceneMap;
     private Stage primaryStage;
@@ -31,12 +29,6 @@ public class SceneManager {
         }
 
         return sceneManager;
-    }
-
-    private void initWindowDimensions() {
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        width = primaryScreenBounds.getHeight() / 3;
-        height = primaryScreenBounds.getWidth() / 3;
     }
 
     public Stage getPrimaryStage() {
