@@ -38,7 +38,7 @@ public class APIDriver {
         }
     }
 
-    public void saveSession(long userId, long sessionDuration, String task) {
+    private void saveSession(long userId, long sessionDuration, String task) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
         TimedSession timedSession = new TimedSession(userId, sessionDuration, task, simpleDateFormat.format(new Date()));
         RestTemplate restTemplate = new RestTemplate();

@@ -93,7 +93,7 @@ public class TimerModel implements Subject {
         private final TimerModel timerModel;
         private boolean end;
 
-        public TimerModelTask(long timeTarget, TimerModel timerModel) {
+        TimerModelTask(long timeTarget, TimerModel timerModel) {
             this.timeTarget = timeTarget;
             this.timerModel = timerModel;
         }
@@ -119,7 +119,7 @@ public class TimerModel implements Subject {
             }
         }
 
-        public void end() {
+        void end() {
             end = true;
         }
     }
