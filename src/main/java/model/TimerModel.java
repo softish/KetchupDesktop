@@ -1,7 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class models and handles a timer.
@@ -14,7 +14,7 @@ public class TimerModel implements Subject {
     private long timeLeft;
     private TimerModelTask timerModelTask;
 
-    private final List<Observer> observers;
+    private final Set<Observer> observers;
 
     /**
      * Constructs a timer with time out at the provided timeTargetMillis.
@@ -25,7 +25,7 @@ public class TimerModel implements Subject {
         this.timeTargetMillis = timeTargetMillis;
         timerModelTask = new TimerModelTask(this.timeTargetMillis, this);
         timeLeft = this.timeTargetMillis;
-        observers = new ArrayList<>();
+        observers = new HashSet<>();
     }
 
     public void startTimer() {
@@ -67,9 +67,7 @@ public class TimerModel implements Subject {
 
     @Override
     public void subscribe(Observer observer) {
-        if (!observers.contains(observer)) {
             observers.add(observer);
-        }
     }
 
     @Override
