@@ -17,6 +17,8 @@ import java.util.Optional;
  */
 public class SignInView extends BorderPane {
 
+    private static final String BACKGROUND_COLOR = "-fx-background: #1E1E1E;";
+
     private Button signInButton;
     private Button registerButton;
 
@@ -29,7 +31,7 @@ public class SignInView extends BorderPane {
         registerButton = new Button("Register");
 
         this.setCenter(getUserButtonsPane());
-        this.setStyle("-fx-background: #1E1E1E;");
+        this.setStyle(BACKGROUND_COLOR);
     }
 
     private FlowPane getUserButtonsPane() {
@@ -64,7 +66,7 @@ public class SignInView extends BorderPane {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle(dialogTitle);
         dialog.setHeaderText(null);
-        dialog.getDialogPane().setStyle("-fx-background: #1E1E1E; -fx-fill: #DCDCDC;");
+        dialog.getDialogPane().setStyle(BACKGROUND_COLOR);
 
         ButtonType confirmationButton = new ButtonType(buttonText, ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(confirmationButton, ButtonType.CANCEL);

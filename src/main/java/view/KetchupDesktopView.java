@@ -23,6 +23,8 @@ import java.util.Optional;
  */
 public class KetchupDesktopView extends BorderPane {
 
+    private static final String BACKGROUND_COLOR = "-fx-background: #1E1E1E;";
+
     private Button resetButton;
     private Button changeStateButton;
     private Button signOutButton;
@@ -112,7 +114,7 @@ public class KetchupDesktopView extends BorderPane {
     }
 
     private void enableDarkTheme() {
-        this.setStyle("-fx-background: #1E1E1E;");
+        this.setStyle(BACKGROUND_COLOR);
         timerLabel.setStyle("-fx-font-size: 42px; -fx-font-weight: bold; -fx-fill: #DCDCDC;");
     }
 
@@ -158,6 +160,7 @@ public class KetchupDesktopView extends BorderPane {
         dialog.setTitle("Time out");
         dialog.setHeaderText(null);
         dialog.setContentText("Time out! Next session task:");
+        dialog.getDialogPane().setStyle(BACKGROUND_COLOR);
 
         return dialog.showAndWait();
     }
@@ -167,6 +170,7 @@ public class KetchupDesktopView extends BorderPane {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+        alert.getDialogPane().setStyle(BACKGROUND_COLOR);
 
         alert.showAndWait();
     }
@@ -216,6 +220,7 @@ public class KetchupDesktopView extends BorderPane {
         dialog.setTitle("Add task Dialog");
         dialog.setHeaderText(null);
         dialog.setContentText("Enter task:");
+        dialog.getDialogPane().setStyle(BACKGROUND_COLOR);
 
         return dialog.showAndWait();
     }
