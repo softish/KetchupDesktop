@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public class SceneManager {
 
-    private static final double width = 360;
-    private static final double height = 640;
+    private static final double WIDTH = 360;
+    private static final double HEIGHT = 640;
 
     private final Map<SceneName, Scene> sceneMap;
     private Stage primaryStage;
